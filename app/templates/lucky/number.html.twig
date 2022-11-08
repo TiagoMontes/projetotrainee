@@ -47,16 +47,16 @@
 </head>
 
     <body>
-        <form action="" method="POST">
+        <form method="POST">
             <h1>Melhores filmes de 2022</h1>
             <input type="text" name="filme" id="campo_texto" placeholder="Digite o nome do filme">
             <input type="submit" id="botao" value="Adicionar">
         </form>
         <ul>
             <h3>Lista de filmes</h3>
-            <li>Star Wars</li>
-            <li>Star Trek</li>
-            <li>Star Gate</li>
+            {% for filme in filmes %}
+                <li>{{filme.name}}</li>
+            {% endfor %}
         </ul>
     </body>
 </html>
