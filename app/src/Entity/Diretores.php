@@ -21,12 +21,12 @@ class Diretores
         return $this->id;
     }
 
-    public function getNome(): ?string
+    public function getName(): ?string
     {
         return $this->nome;
     }
 
-    public function setNome(string $nome): self
+    public function setName(string $nome): self
     {
         $this->nome = $nome;
 

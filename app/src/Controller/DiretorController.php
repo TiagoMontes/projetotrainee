@@ -28,7 +28,7 @@ class DiretorController extends AbstractController
     public function novoDiretor(Request $request)
     {
         $diretores = new Diretores();
-        $diretores->setNome($request->request->get('diretor'));
+        $diretores->setName($request->request->get('diretor'));
         $this->diretoresRepository->save($diretores, true);
 
         return $this->redirect('/diretor/lista');
