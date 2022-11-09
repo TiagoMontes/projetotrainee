@@ -20,7 +20,7 @@ class FilmeController extends AbstractController
     {
         $listaFilmes = $this->filmeRepository->findAll();
 
-        return $this->render('lucky/number.html.twig', [ // renderiza a view number.html.twig
+        return $this->render('filme/filmeList.html.twig', [ // renderiza a view number.html.twig
             'filmes' => $listaFilmes // pega todos os filmes do banco de dados
         ]);
     }

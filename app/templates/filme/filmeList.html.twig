@@ -1,0 +1,125 @@
+<html>
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+
+        input {
+            margin: 10px 0;
+            border: none;
+        }
+
+        form {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        h1 {
+            font-size: 72px;
+            background: -webkit-linear-gradient(62deg,#FBAB7E, #F7CE68);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        ul{
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            justify-content: center;
+        }
+
+        li {
+            list-style: none;
+            margin: 10px 0;
+            width: 400px;
+            border-bottom: 2px solid #FBAB7E;
+            border-left: 2px solid #FBAB7E;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .Cadastro{
+            border: 1px solid #000;
+        }
+
+        .list{
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: center;
+        }
+
+        #campo_texto{
+            width: 450px;
+            height: 36px;
+            font-size: 18px;
+            padding: 0 0 0 10px;
+            border-bottom: 1px solid grey;
+            
+        }
+
+        #botao{
+            width: 112px;
+            height: 36px;
+            font-size: 18px;
+            background-color: #ffffff;
+            color: black;
+            border-bottom: 1px solid grey;
+            cursor: pointer;
+            border-radius: 5px;
+            
+            transition: 0.5s ease;
+        }
+
+        #botao:hover{
+            background-color: #FBAB7E;
+            color: white;
+            border: 1px solid white;
+
+        }
+
+    </style>
+</head>
+    <body>
+        <div class="header">
+            <h1>Melhores filmes de 2022</h1>
+            <form action="/filme/novo" method="POST">
+                <input type="text" name="filme" id="campo_texto" placeholder="Digite o nome do filme">
+                <input type="submit" id="botao" value="Adicionar">
+            </form>
+        </div>
+        <ul>
+            <h2>Lista de filmes</h2>
+            {% for filme in filmes %}  {# esta linha significa - para cada filme dentro de filmes, executaremos o codigo abaixo#}
+                <div class="list">               
+                    <li>{{filme.name}}</li>
+                    <form action="/filme/delete" method="POST">
+                        <input type="hidden" name="id" value="{{ filme.id }}">
+                        <input type="submit" id="botao" value="Remover">
+                    </form>
+                </div>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
+
+{# templates/lucky/number.html.twig #}
