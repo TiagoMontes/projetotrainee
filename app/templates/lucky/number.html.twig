@@ -11,9 +11,9 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
             padding: 20px;
         }
+
 
         input {
             margin: 10px 0;
@@ -50,10 +50,22 @@
         li {
             list-style: none;
             margin: 10px 0;
+            width: 400px;
             border-bottom: 2px solid #FBAB7E;
             border-left: 2px solid #FBAB7E;
             padding: 10px;
             border-radius: 5px;
+        }
+
+        .Cadastro{
+            border: 1px solid #000;
+        }
+
+        .list{
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: center;
         }
 
         #campo_texto{
@@ -71,8 +83,7 @@
             font-size: 18px;
             background-color: #ffffff;
             color: black;
-            margin-bottom: 60px;
-            border: 1px solid grey;
+            border-bottom: 1px solid grey;
             cursor: pointer;
             border-radius: 5px;
             
@@ -91,7 +102,7 @@
     <body>
         <div class="header">
             <h1>Melhores filmes de 2022</h1>
-            <form method="POST">
+            <form action="/filme/novo" method="POST">
                 <input type="text" name="filme" id="campo_texto" placeholder="Digite o nome do filme">
                 <input type="submit" id="botao" value="Adicionar">
             </form>
@@ -99,7 +110,13 @@
         <ul>
             <h2>Lista de filmes</h2>
             {% for filme in filmes %}  {# esta linha significa - para cada filme dentro de filmes, executaremos o codigo abaixo#}
-                <li>{{filme.name}}</li>
+                <div class="list">               
+                    <li>{{filme.name}}</li>
+                    <form action="/filme/delete" method="POST">
+                        <input type="hidden" name="id" value="{{ filme.id }}">
+                        <input type="submit" id="botao" value="Remover">
+                    </form>
+                </div>
             {% endfor %}
         </ul>
     </body>

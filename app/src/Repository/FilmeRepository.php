@@ -11,7 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @extends ServiceEntityRepository<Filme>
  *
  * @method Filme|null find($id, $lockMode = null, $lockVersion = null)
- * @method Filme|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Filme|null findOneBy(array $criteria, array $orderBy = null) // faz tratamento para garantir que so tenha 1
  * @method Filme[]    findAll()
  * @method Filme[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
