@@ -33,4 +33,16 @@ class DiretorController extends AbstractController
 
         return $this->redirect('/diretor/lista');
     }
+
+    #[Route('/diretor/delete', name: 'diretor_delete', methods: ['POST'])] 
+    public function deleteDiretor(Request $request)
+    {
+        $diretorId = ($request->request->get('id'));
+        $diretor = $this->diretoresRepository->find($diretorId);
+        if($diretor){
+            $this->diretoresRepository->remove($diretor, true);
+        }
+
+        return $this->redirect('/diretor/lista');
+    }
 }
