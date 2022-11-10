@@ -13,18 +13,19 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FilmeController extends AbstractController
 {
-    public function __construct( private FilmeRepository $filmeRepository, private DiretorRepository $diretorRepository ) { // construtor é o trecho de código que é executado junto com a instanciação da classe
+    public function __construct( private FilmeRepository $filmeRepository, private DiretorRepository $diretorRepository ) { 
+
     }
     
-    #[Route('/filme/lista', name: 'filme_list', methods: ['GET'])] // rota é o caminho que o usuário acessa. O metodo GET é puxar informações
-    public function filmes() // request é o objeto que contém os dados da requisição 
+    #[Route('/filme/lista', name: 'filme_list', methods: ['GET'])]
+    public function filmes()
     {
         $listaFilmes = $this->filmeRepository->findAll();
         $listaDiretores = $this->diretorRepository->findAll();
 
-        return $this->render('filme/filmeList.html.twig', [ // renderiza a view number.html.twig
+        return $this->render('filme/filmeList.html.twig', [
             'filmes' => $listaFilmes,
-            'diretores' => $listaDiretores // pega todos os filmes do banco de dados
+            'diretores' => $listaDiretores
         ]);
     }
 
@@ -32,12 +33,12 @@ class FilmeController extends AbstractController
     public function novoFilme(Request $request)
     {
         $filme = new Filme();
-        $filme->setName($request->request->get('filme')); // seta o nome do filme com o valor do input filme
+        $filme->setName($request->request->get('filme'));
         $diretor = $this->diretorRepository->find($request->request->get('diretor'));
         
         if($diretor){
             $filme->setDiretor($diretor);
-            $this->filmeRepository->save($filme, true);// salva o filme
+            $this->filmeRepository->save($filme, true);
         }
         
         return $this->redirect('/filme/lista');
@@ -46,8 +47,8 @@ class FilmeController extends AbstractController
     #[Route('/filme/delete', name: 'filme_delete', methods: ['POST'])]
     public function deleteFilme(Request $request)
     {
-        $filmeId = ($request->request->get('id')); // recebendo ID do filme em especifico
-        $filme = $this->filmeRepository->find($filmeId); // procurando id na lista de filmes
+        $filmeId = ($request->request->get('id'));
+        $filme = $this->filmeRepository->find($filmeId);
         if($filme){
             $this->filmeRepository->remove($filme, true);
         }

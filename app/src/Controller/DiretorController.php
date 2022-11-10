@@ -11,16 +11,16 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DiretorController extends AbstractController
 {
-    public function __construct( private DiretorRepository $diretorRepository) { // esse construtor será executado junto à uma instanciação da classe
+    public function __construct( private DiretorRepository $diretorRepository) {
     }
 
-    #[Route('/diretor/lista', name: 'diretor_list', methods: ['GET'])] // rota é o caminho que o usuário acessa. O metodo GET é puxar informações
-    public function diretores() // request é o objeto que contém os dados da requisição 
+    #[Route('/diretor/lista', name: 'diretor_list', methods: ['GET'])]
+    public function diretores()
     {
         $listaDiretores = $this->diretorRepository->findAll();
 
-        return $this->render('diretor/index.html.twig', [ // renderiza a view number.html.twig
-            'diretores' => $listaDiretores // pega todos os filmes do banco de dados
+        return $this->render('diretor/index.html.twig', [
+            'diretores' => $listaDiretores
         ]);
     }
 
