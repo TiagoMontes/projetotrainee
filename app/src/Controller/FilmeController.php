@@ -20,28 +20,28 @@ class FilmeController extends AbstractController
     #[Route('/filme/lista', name: 'filme_list', methods: ['GET'])]
     public function filmes()
     {
-        $listaFilmes = $this->filmeRepository->findAll();
-        $listaDiretores = $this->diretorRepository->findAll();
+        $listaFilmes = $this->filmeRepository->findAll(); // irá procurar toda a lista de filmes
+        $listaDiretores = $this->diretorRepository->findAll(); // irá procurar toda a lista de diretores
 
         return $this->render('filme/filmeList.html.twig', [
-            'filmes' => $listaFilmes,
-            'diretores' => $listaDiretores
+            'filmes' => $listaFilmes, // passando como parametro filmes a lista de filmes
+            'diretores' => $listaDiretores // passando como parametro diretores a lista de diretores
         ]);
     }
 
     #[Route('/filme/novo', name: 'filme_novo', methods: ['POST'])]
     public function novoFilme(Request $request)
     {
-        $filme = new Filme();
-        $filme->setName($request->request->get('filme'));
-        $diretor = $this->diretorRepository->find($request->request->get('diretor'));
+        $filme = new Filme(); // instanciando um objeto chamado $filme
+        $filme->setName($request->request->get('filme')); //definindo o setName como o valor dentro do input filme em nosso front
+        $diretor = $this->diretorRepository->find($request->request->get('diretor')); // a variavel diretor irá procurar no repositorio o diretor
         
-        if($diretor){
+        if($diretor){ // caso tenha diretor, ele irá setar o diretor e salvará o setName e setDiretor no repositorio, e depois dará um flush
             $filme->setDiretor($diretor);
             $this->filmeRepository->save($filme, true);
         }
         
-        return $this->redirect('/filme/lista');
+        return $this->redirect('/filme/lista'); // redirecionará para a lista de filmes
     }
     
     #[Route('/filme/delete', name: 'filme_delete', methods: ['POST'])]
