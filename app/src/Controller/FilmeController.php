@@ -4,6 +4,7 @@ namespace App\Controller; // namespace é o caminho do arquivo
 
 use App\Entity\Filme;
 use App\Repository\FilmeRepository;
+use App\Repository\DiretorRepository;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,16 +13,18 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FilmeController extends AbstractController
 {
-    public function __construct( private FilmeRepository $filmeRepository ) { // construtor é o trecho de código que é executado junto com a instanciação da classe
+    public function __construct( private FilmeRepository $filmeRepository, private DiretorRepository $diretorRepository ) { // construtor é o trecho de código que é executado junto com a instanciação da classe
     }
     
     #[Route('/filme/lista', name: 'filme_list', methods: ['GET'])] // rota é o caminho que o usuário acessa. O metodo GET é puxar informações
     public function filmes() // request é o objeto que contém os dados da requisição 
     {
         $listaFilmes = $this->filmeRepository->findAll();
+        $listaDiretores = $this->diretorRepository->findAll();
 
         return $this->render('filme/filmeList.html.twig', [ // renderiza a view number.html.twig
-            'filmes' => $listaFilmes // pega todos os filmes do banco de dados
+            'filmes' => $listaFilmes,
+            'diretores' => $listaDiretores // pega todos os filmes do banco de dados
         ]);
     }
 
@@ -30,10 +33,15 @@ class FilmeController extends AbstractController
     {
         $filme = new Filme();
         $filme->setName($request->request->get('filme')); // seta o nome do filme com o valor do input filme
-        $this->filmeRepository->save($filme, true);// salva o filme
-
+        $diretor = $this->diretorRepository->find($request->request->get('diretor'));
+        
+        if($diretor){
+            $filme->setDiretor($diretor);
+            $this->filmeRepository->save($filme, true);// salva o filme
+        }
+        
         return $this->redirect('/filme/lista');
-    }  
+    }
     
     #[Route('/filme/delete', name: 'filme_delete', methods: ['POST'])]
     public function deleteFilme(Request $request)

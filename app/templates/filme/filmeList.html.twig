@@ -105,6 +105,11 @@
             <form action="/filme/novo" method="POST">
                 <input type="text" name="filme" id="campo_texto" placeholder="Digite o nome do filme">
                 <input type="submit" id="botao" value="Adicionar">
+                <select name="diretor" id="diretor">
+                    {% for diretor in diretores%}
+                        <option value={{diretor.id}}>{{diretor.name}}</option>
+                    {% endfor %}
+                </select>
             </form>
         </div>
         <ul>
@@ -112,6 +117,7 @@
             {% for filme in filmes %}  {# esta linha significa - para cada filme dentro de filmes, executaremos o codigo abaixo#}
                 <div class="list">               
                     <li>{{filme.name}}</li>
+                    <li>{{filme.diretor.name}}</li>
                     <form action="/filme/delete" method="POST">
                         <input type="hidden" name="id" value="{{ filme.id }}">
                         <input type="submit" id="botao" value="Remover">

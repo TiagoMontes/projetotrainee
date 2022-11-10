@@ -16,16 +16,13 @@ class Filme
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\ManyToOne(inversedBy: 'filmes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Diretor $diretor = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     public function getName(): ?string
@@ -36,6 +33,18 @@ class Filme
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getDiretor(): ?Diretor
+    {
+        return $this->diretor;
+    }
+
+    public function setDiretor(?Diretor $diretor): self
+    {
+        $this->diretor = $diretor;
 
         return $this;
     }
