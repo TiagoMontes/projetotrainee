@@ -110,6 +110,11 @@
                         <option value={{diretor.id}}>{{diretor.name}}</option>
                     {% endfor %}
                 </select>
+                <select name="titulo" id="genero">
+                    {% for genero in generos %}
+                        <option value={{genero.id}}>{{genero.titulo}}</option>
+                    {% endfor %}
+                </select>
             </form>
         </div>
         <ul>
@@ -118,6 +123,7 @@
                 <div class="list">               
                     <li>{{filme.name}}</li>
                     <li>{{filme.diretor.name}}</li>
+                    <li>{{filme.genero.titulo}}</li>
                     <form action="/filme/delete" method="POST">
                         <input type="hidden" name="id" value="{{ filme.id }}">
                         <input type="submit" id="botao" value="Remover">

@@ -20,8 +20,9 @@ class Filme
     #[ORM\JoinColumn(nullable: false)]
     private ?Diretor $diretor = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Genero = null;
+    #[ORM\ManyToOne(inversedBy: 'Genero')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Genero $genero = null;
 
     public function getId(): ?int
     {
@@ -52,14 +53,14 @@ class Filme
         return $this;
     }
 
-    public function getGenero(): ?string
+    public function getGenero(): Genero
     {
-        return $this->Genero;
+        return $this->genero;
     }
 
-    public function setGenero(string $Genero): self
+    public function setGenero(Genero $genero): self
     {
-        $this->Genero = $Genero;
+        $this->genero = $genero;
 
         return $this;
     }

@@ -115,7 +115,7 @@
         <h2>Lista de Generos</h2>
         {% for genero in generos %} {# "para cada genero em generos" #}
             <div class="list">
-                <li> {{genero.genero}} </li>
+                <li> {{genero.titulo}} </li>
                 <form action="/genero/delete" method="POST"> 
                     <input type="hidden" name="id" value="{{ genero.id }}"/> {#Estamos identificado o ID do input que vamos excluir#}
                     <input type="submit" id="botao" value="Remover"/>

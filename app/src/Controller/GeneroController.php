@@ -28,7 +28,7 @@ class GeneroController extends AbstractController
     public function novoGenero(Request $request)
     {
         $genero = new Genero();
-        $genero->setGenero($request->request->get('genero'));
+        $genero->setTitulo($request->request->get('genero'));
         $this->generoRepository->save($genero, true);
 
         return $this->redirect('/genero/lista');

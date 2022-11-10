@@ -14,33 +14,38 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FilmeController extends AbstractController
 {
-    public function __construct( private FilmeRepository $filmeRepository, private DiretorRepository $diretorRepository, GeneroRepository $generoRepository ) { 
+
+    public function __construct( private FilmeRepository $filmeRepository, private DiretorRepository $diretorRepository, private GeneroRepository $generoRepository ) { 
 
     }
     
     #[Route('/filme/lista', name: 'filme_list', methods: ['GET'])]
     public function filmes()
     {
+
         $listaFilmes = $this->filmeRepository->findAll(); // irá procurar toda a lista de filmes
         $listaDiretores = $this->diretorRepository->findAll(); // irá procurar toda a lista de diretores
-        $listaGeneros = $this->diretorRepository->findAll(); // irá procurar toda a lista de generos
+        $listaGeneros = $this->generoRepository->findAll(); // irá procurar toda a lista de generos
 
         return $this->render('filme/filmeList.html.twig', [
             'filmes' => $listaFilmes, // passando como parametro filmes a lista de filmes para ser usado no front
             'diretores' => $listaDiretores, // passando como parametro diretores a lista de diretores para ser usado no front
-            'generos' => $listaGeneros // passando como parametro 'generos ' a lista de generos para ser usado no front
+            'generos' => $listaGeneros, // passando como parametro 'generos ' a lista de generos para ser usado no front
         ]);
     }
 
     #[Route('/filme/novo', name: 'filme_novo', methods: ['POST'])]
     public function novoFilme(Request $request)
     {
+
         $filme = new Filme(); // instanciando um objeto chamado $filme
         $filme->setName($request->request->get('filme')); //definindo o setName como o valor dentro do input filme em nosso front
         $diretor = $this->diretorRepository->find($request->request->get('diretor')); // a variavel diretor irá procurar no repositorio o diretor
+        $genero = $this->generoRepository->find($request->request->get('titulo'));
         
-        if($diretor){ // caso tenha diretor, ele irá setar o diretor e salvará o setName e setDiretor no repositorio, e depois dará um flush
+        if($diretor && $genero){ // caso tenha diretor, ele irá setar o diretor e salvará o setName e setDiretor no repositorio, e depois dará um flush
             $filme->setDiretor($diretor);
+            $filme->setGenero($genero);
             $this->filmeRepository->save($filme, true);
         }
         
