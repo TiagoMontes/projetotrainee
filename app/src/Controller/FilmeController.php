@@ -5,6 +5,7 @@ namespace App\Controller; // namespace é o caminho do arquivo
 use App\Entity\Filme;
 use App\Repository\FilmeRepository;
 use App\Repository\DiretorRepository;
+use App\Repository\GeneroRepository;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FilmeController extends AbstractController
 {
-    public function __construct( private FilmeRepository $filmeRepository, private DiretorRepository $diretorRepository ) { 
+    public function __construct( private FilmeRepository $filmeRepository, private DiretorRepository $diretorRepository, GeneroRepository $generoRepository ) { 
 
     }
     
@@ -22,10 +23,12 @@ class FilmeController extends AbstractController
     {
         $listaFilmes = $this->filmeRepository->findAll(); // irá procurar toda a lista de filmes
         $listaDiretores = $this->diretorRepository->findAll(); // irá procurar toda a lista de diretores
+        $listaGeneros = $this->diretorRepository->findAll(); // irá procurar toda a lista de generos
 
         return $this->render('filme/filmeList.html.twig', [
-            'filmes' => $listaFilmes, // passando como parametro filmes a lista de filmes
-            'diretores' => $listaDiretores // passando como parametro diretores a lista de diretores
+            'filmes' => $listaFilmes, // passando como parametro filmes a lista de filmes para ser usado no front
+            'diretores' => $listaDiretores, // passando como parametro diretores a lista de diretores para ser usado no front
+            'generos' => $listaGeneros // passando como parametro 'generos ' a lista de generos para ser usado no front
         ]);
     }
 
