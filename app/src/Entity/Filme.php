@@ -20,6 +20,9 @@ class Filme
     #[ORM\JoinColumn(nullable: false)]
     private ?Diretor $diretor = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $Genero = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +48,18 @@ class Filme
     public function setDiretor(?Diretor $diretor): self
     {
         $this->diretor = $diretor;
+
+        return $this;
+    }
+
+    public function getGenero(): ?string
+    {
+        return $this->Genero;
+    }
+
+    public function setGenero(string $Genero): self
+    {
+        $this->Genero = $Genero;
 
         return $this;
     }
