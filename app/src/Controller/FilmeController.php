@@ -35,16 +35,17 @@ class FilmeController extends AbstractController
     #[Route('/filme/novo', name: 'filme_novo', methods: ['POST'])]
     public function novoFilme(Request $request)
     {
+
         // estamos pegando dados da request
         $filmeName = $request->request->get('filme');
         $diretorId = $request->request->get('diretor');
-        $generoId = $request->request->get('diretor');
+        $generoId = $request->request->get('generoId');
         
         // estamos procurando no banco dos repositorios
         $diretor = $this->diretorRepository->find($diretorId); // a variavel diretor irá procurar no repositorio o diretor
         $genero = $this->generoRepository->find($generoId);
         
-        if($diretor && $genero){ // caso tenha diretor e genero, ele irá setar ambos e salvará o setDiretor e setGenero no repositorio, e depois dará um flush
+        if($diretor != null && $genero != null){
             
             $filme = new Filme(); // instanciando um objeto chamado $filme
             $filme->setName($filmeName); //definindo o setName como o valor dentro do input filme em nosso front

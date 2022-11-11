@@ -68,7 +68,6 @@ class DiretorController extends AbstractController
         $diretor = $this->diretorRepository->find($diretorId);
         $diretor->setName($diretorName);
 
-
         if($diretor){
             $this->diretorRepository->save($diretor, true);
         }

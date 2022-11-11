@@ -38,9 +38,9 @@ class GeneroController extends AbstractController
     public function deleteGenero(Request $request)
     {
         $generoId = ($request->request->get('id'));
-        $genero = $this->diretorRepository->find($generoId);
+        $genero = $this->generoRepository->find($generoId);
         if($genero){
-            $this->diretorRepository->remove($genero, true);
+            $this->generoRepository->remove($genero, true);
         }
 
         return $this->redirect('/genero/lista');
