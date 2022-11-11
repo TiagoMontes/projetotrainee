@@ -14,21 +14,33 @@ class DiretorController extends AbstractController
     public function __construct( private DiretorRepository $diretorRepository) {
     }
 
-    #[Route('/diretor/lista', name: 'diretor_list', methods: ['GET'])]
-    public function diretores()
+    #[Route('/diretor/lista/{erro}', name: 'diretor_list', methods: ['GET'])]
+    public function diretores(string $erro = null)
     {
         $listaDiretores = $this->diretorRepository->findAll();
-
+        
         return $this->render('diretor/index.html.twig', [
-            'diretores' => $listaDiretores
+            'diretores' => $listaDiretores,
+            'erro' => $erro
         ]);
+
     }
 
     #[Route('/diretor/novo', name: 'diretor_novo', methods: ['POST'])]
     public function novoDiretor(Request $request)
     {
+        $diretorName = $request->request->get('diretor');
+
+        try {
+            if($diretorName === "Tiago"){
+                throw new \Exception("Tiago não pode ser diretor");     
+            }
+        } catch (\Exception $e) {
+            return $this->redirectToRoute('diretor_list', ["erro"=>$e->getMessage()]);
+        }
+
         $diretor = new Diretor();
-        $diretor->setName($request->request->get('diretor'));
+        $diretor->setName($diretorName);
         $this->diretorRepository->save($diretor, true);
 
         return $this->redirect('/diretor/lista');
@@ -41,6 +53,24 @@ class DiretorController extends AbstractController
         $diretor = $this->diretorRepository->find($diretorId);
         if($diretor){
             $this->diretorRepository->remove($diretor, true);
+        }
+
+        return $this->redirect('/diretor/lista');
+    }
+
+    #[Route('/diretor/editar', name: 'diretor_editar', methods: ['POST'])] 
+    public function editarDiretor(Request $request)
+    {
+        $diretorName = $request->request->get('diretor');
+
+
+        $diretorId = ($request->request->get('id')); 
+        $diretor = $this->diretorRepository->find($diretorId);
+        $diretor->setName($diretorName);
+
+
+        if($diretor){
+            $this->diretorRepository->save($diretor, true);
         }
 
         return $this->redirect('/diretor/lista');

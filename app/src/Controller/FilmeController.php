@@ -21,7 +21,6 @@ class FilmeController extends AbstractController
     #[Route('/filme/lista', name: 'filme_list', methods: ['GET'])]
     public function filmes()
     {
-
         $listaFilmes = $this->filmeRepository->findAll(); // irá procurar toda a lista de filmes
         $listaDiretores = $this->diretorRepository->findAll(); // irá procurar toda a lista de diretores
         $listaGeneros = $this->generoRepository->findAll(); // irá procurar toda a lista de generos

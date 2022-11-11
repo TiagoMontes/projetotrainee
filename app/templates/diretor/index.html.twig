@@ -15,7 +15,7 @@
         }
 
 
-        input {
+        input , button{
             margin: 10px 0;
             border: none;
         }
@@ -81,7 +81,7 @@
             
         }
 
-        #botao{
+        .botao{
             width: 112px;
             height: 36px;
             font-size: 18px;
@@ -94,7 +94,7 @@
             transition: 0.5s ease;
         }
 
-        #botao:hover{
+        .botao:hover{
             background-color: #FBAB7E;
             color: white;
             border: 1px solid white;
@@ -108,19 +108,38 @@
         <h1>Os melhores diretores da última década</h1>
         <form action="/diretor/novo" method="POST">
             <input type="text" name="diretor" id="campo_diretor"/>
-            <input type="submit" id="botao" value="Adicionar" />
+            <input type="submit" class="botao" value="Adicionar" />
         </form>
     </div>
     <ul>
         <h2>Lista de diretores</h2>
+        {% if erro %}
+            <p>{{erro}}</p>
+        {% endif %}
         {% for diretor in diretores %} {# "para cada diretor em diretores" #}
             <div class="list">
                 <li> {{diretor.name}} </li>
                 <form action="/diretor/delete" method="POST"> 
                     <input type="hidden" name="id" value="{{ diretor.id }}"/> {#Estamos identificado o ID do input que vamos excluir#}
-                    <input type="submit" id="botao" value="Remover"/>
+                    <input type="submit" class="botao" value="Remover"/>
                 </form>
+                <div class="form_edicao" id="form_edicao_{{diretor.id}}" hidden>
+                    <form action="/diretor/editar" method="POST">
+                        <input type="hidden" name="id" value="{{ diretor.id }}"/> 
+                        <input type="text" name="diretor" id="campo_diretor"/>
+                        <input type="submit" class="botao" value="editar"/>
+                    </form>
+                </div>
+                <button onclick="test({{diretor.id}})" class="botao botao_editar" >Edite!</button>
             </div>
         {% endfor %}
     </ul>
 </body>
+<script>
+
+    function test(diretor_id){
+        let form = document.querySelector("#form_edicao_"+diretor_id);
+        form.hidden = !form.hidden
+    }
+    
+</script>
