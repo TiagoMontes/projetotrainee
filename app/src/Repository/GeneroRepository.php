@@ -23,7 +23,7 @@ class GeneroRepository extends ServiceEntityRepository
 
     public function save(Genero $entity, bool $flush = false): void
     {
-        $this->getEntityManager()->persist($entity);
+        $this->getEntityManager()->persist($entity); // vc nao precisa saber disso aqui, segue o baile
 
         if ($flush) {
             $this->getEntityManager()->flush();

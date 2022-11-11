@@ -37,7 +37,7 @@ class DiretorController extends AbstractController
     #[Route('/diretor/delete', name: 'diretor_delete', methods: ['POST'])] 
     public function deleteDiretor(Request $request)
     {
-        $diretorId = ($request->request->get('id'));
+        $diretorId = ($request->request->get('id'));  // Como ele sabe especificamente qual o id do input? sendo que estamos trazendo o name, não o value
         $diretor = $this->diretorRepository->find($diretorId);
         if($diretor){
             $this->diretorRepository->remove($diretor, true);

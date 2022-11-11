@@ -38,6 +38,7 @@
         h2 {
             font-size: 36px;
             font-weight: bold;
+            margin-top: 60px;
         }
 
         ul{
@@ -117,8 +118,8 @@
                 </select>
             </form>
         </div>
-        <ul>
-            <h2>Lista de filmes</h2>
+        <h2>Lista de filmes</h2>
+        <ul>    
             {% for filme in filmes %}  {# esta linha significa - para cada filme dentro de filmes, executaremos o codigo abaixo#}
                 <div class="list">               
                     <li>{{filme.name}}</li>
