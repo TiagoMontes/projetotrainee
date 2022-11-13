@@ -65,6 +65,14 @@ class DiretorController extends AbstractController
     {
         $diretorName = $request->request->get('diretor');
         $diretorId = ($request->request->get('id')); 
+
+        try {
+            if($diretorName === "Tiago"){
+                throw new \Exception("Tiago não pode ser diretor");     
+            }
+        } catch (\Exception $e) {
+            return $this->redirectToRoute('diretor_list', ["erro"=>$e->getMessage()]);
+        }
         
         $diretor = $this->diretorRepository->find($diretorId);
         $diretor->setName($diretorName);
