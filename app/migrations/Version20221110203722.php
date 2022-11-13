@@ -1,4 +1,5 @@
 <?php
+// migrations são arquivos que irão fazer alterações no banco de dados, como criar tabelas, adicionar colunas, etc. Devemos criar uma migração nova toda vez que precisarmos fazer uma alteração no banco de dados. Ex: adicionar uma coluna, criar uma tabela, etc.
 
 declare(strict_types=1);
 

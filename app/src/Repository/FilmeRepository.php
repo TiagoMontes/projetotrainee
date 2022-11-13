@@ -1,5 +1,6 @@
 <?php
-// Resumindo, esse repositorio é responsavel pela tabela de Filmes
+// Um repositório é um objeto que irá fazer a comunicação com o banco de dados, ele é responsável por fazer as consultas e salvar os dados no banco de forma organizada e padronizada.
+// Poderiamos retirar o repository e fazer as consultas diretamente no controller, mas isso não é uma boa prática, pois o controller não deveria ter essa responsabilidade.
 
 namespace App\Repository;
 
@@ -24,10 +25,10 @@ class FilmeRepository extends ServiceEntityRepository
 
     public function save(Filme $entity, bool $flush = false): void
     {
-        $this->getEntityManager()->persist($entity);
+        $this->getEntityManager()->persist($entity); // getEntityManager é um metodo que irá pegar o entity manager, que é um objeto que irá gerenciar as entidades
 
         if ($flush) {
-            $this->getEntityManager()->flush();
+            $this->getEntityManager()->flush(); // flush é um metodo que irá salvar no banco
         }
     }
 

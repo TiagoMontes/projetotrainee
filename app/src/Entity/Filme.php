@@ -1,4 +1,5 @@
 <?php
+//Entity é uma classe que representa uma tabela do banco de dados, ela é responsável por definir os atributos da tabela e os seus tipos, além de definir os relacionamentos entre as tabelas. 
 
 namespace App\Entity;
 
@@ -16,15 +17,17 @@ class Filme
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'filmes')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Diretor $diretor = null;
+    #[ORM\ManyToOne(inversedBy: 'filmes')] // many to one é um relacionamento de muitos para um, onde um diretor pode ter varios filmes
+    #[ORM\JoinColumn(nullable: false)] // join column é uma coluna que irá fazer o relacionamento entre as tabelas
+    private ?Diretor $diretor = null; // diretor é o nome da classe que representa a tabela diretor
 
     #[ORM\ManyToOne(inversedBy: 'Genero')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false)] 
     private ?Genero $genero = null;
 
-    public function getId(): ?int
+    // as funções abaixo são getters e setters, que são responsáveis por pegar e definir os valores dos atributos da classe
+
+    public function getId(): ?int // retorna o id
     {
         return $this->id;
     }
@@ -34,7 +37,7 @@ class Filme
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): self 
     {
         $this->name = $name;
 

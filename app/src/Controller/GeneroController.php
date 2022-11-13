@@ -29,6 +29,7 @@ class GeneroController extends AbstractController
     {
         $genero = new Genero();
         $genero->setTitulo($request->request->get('genero'));
+        
         $this->generoRepository->save($genero, true);
 
         return $this->redirect('/genero/lista');
@@ -39,6 +40,7 @@ class GeneroController extends AbstractController
     {
         $generoId = ($request->request->get('id'));
         $genero = $this->generoRepository->find($generoId);
+
         if($genero){
             $this->generoRepository->remove($genero, true);
         }

@@ -62,9 +62,8 @@ class DiretorController extends AbstractController
     public function editarDiretor(Request $request)
     {
         $diretorName = $request->request->get('diretor');
-
-
         $diretorId = ($request->request->get('id')); 
+        
         $diretor = $this->diretorRepository->find($diretorId);
         $diretor->setName($diretorName);
 

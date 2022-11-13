@@ -1,24 +1,26 @@
 <?php
 // src/Controller/LuckyController.php
+
 namespace App\Controller; // namespace é o caminho do arquivo
 
 use App\Entity\Filme;
 use App\Repository\FilmeRepository;
-use App\Repository\DiretorRepository;
-use App\Repository\GeneroRepository;
+use App\Repository\DiretorRepository; // importa a classe diretor repository para poder usar os metodos dela
+use App\Repository\GeneroRepository; // importa a classe genero repository para poder usar os metodos dela
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
-class FilmeController extends AbstractController
+// a classe abaixo é um controller, que é um objeto que recebe uma requisição e retorna uma resposta 
+class FilmeController extends AbstractController  
 {
     public function __construct( private FilmeRepository $filmeRepository, private DiretorRepository $diretorRepository, private GeneroRepository $generoRepository ) { 
-
+        // o construtor é um metodo que é executado quando a classe é instanciada
     }
     
-    #[Route('/filme/lista', name: 'filme_list', methods: ['GET'])]
+    #[Route('/filme/lista', name: 'filme_list', methods: ['GET'])] // route é a rota que o usuario vai acessar para acessar o metodo. Ela mapeia uma url para um metodo
     public function filmes()
     {
         $listaFilmes = $this->filmeRepository->findAll(); // irá procurar toda a lista de filmes
@@ -32,17 +34,17 @@ class FilmeController extends AbstractController
         ]);
     }
 
+    // Request é um objeto que contém a requisição feita pelo usuario
     #[Route('/filme/novo', name: 'filme_novo', methods: ['POST'])]
-    public function novoFilme(Request $request)
+    public function novoFilme(Request $request) 
     {
 
-        // estamos pegando dados da request
+        // estamos pegando dados da request, poderiamos resolver com formType
         $filmeName = $request->request->get('filme');
         $diretorId = $request->request->get('diretor');
         $generoId = $request->request->get('generoId');
         
-        // estamos procurando no banco dos repositorios
-        $diretor = $this->diretorRepository->find($diretorId); // a variavel diretor irá procurar no repositorio o diretor
+        $diretor = $this->diretorRepository->find($diretorId);
         $genero = $this->generoRepository->find($generoId);
         
         if($diretor != null && $genero != null){
@@ -62,6 +64,7 @@ class FilmeController extends AbstractController
     {
         $filmeId = ($request->request->get('id'));
         $filme = $this->filmeRepository->find($filmeId);
+        
         if($filme){
             $this->filmeRepository->remove($filme, true);
         }
