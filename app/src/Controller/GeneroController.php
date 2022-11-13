@@ -27,10 +27,14 @@ class GeneroController extends AbstractController
     #[Route('/genero/novo', name: 'genero_novo', methods: ['POST'])]
     public function novoGenero(Request $request)
     {
-        $genero = new Genero();
-        $genero->setTitulo($request->request->get('genero'));
-        
-        $this->generoRepository->save($genero, true);
+        $generoName = $request->request->get('genero');
+
+
+        if($generoName != null){
+            $genero = new Genero();
+            $genero->setTitulo($generoName);
+            $this->generoRepository->save($genero, true);
+        }
 
         return $this->redirect('/genero/lista');
     }

@@ -39,9 +39,11 @@ class DiretorController extends AbstractController
             return $this->redirectToRoute('diretor_list', ["erro"=>$e->getMessage()]);
         }
 
-        $diretor = new Diretor();
-        $diretor->setName($diretorName);
-        $this->diretorRepository->save($diretor, true);
+        if($diretorName != null){
+            $diretor = new Diretor();
+            $diretor->setName($diretorName);
+            $this->diretorRepository->save($diretor, true);
+        }
 
         return $this->redirect('/diretor/lista');
     }
@@ -67,7 +69,7 @@ class DiretorController extends AbstractController
         $diretor = $this->diretorRepository->find($diretorId);
         $diretor->setName($diretorName);
 
-        if($diretor){
+        if($diretor && $diretorName){
             $this->diretorRepository->save($diretor, true);
         }
 

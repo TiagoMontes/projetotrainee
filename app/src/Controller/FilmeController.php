@@ -13,14 +13,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
-// a classe abaixo é um controller, que é um objeto que recebe uma requisição e retorna uma resposta 
+// a classe abaixo é um controller, que é uma metodo que recebe uma requisição e retorna uma resposta
 class FilmeController extends AbstractController  
 {
     public function __construct( private FilmeRepository $filmeRepository, private DiretorRepository $diretorRepository, private GeneroRepository $generoRepository ) { 
         // o construtor é um metodo que é executado quando a classe é instanciada
     }
     
-    #[Route('/filme/lista', name: 'filme_list', methods: ['GET'])] // route é a rota que o usuario vai acessar para acessar o metodo. Ela mapeia uma url para um metodo
+    #[Route('/filme/lista', name: 'filme_list', methods: ['GET'])] // route é a rota que o usuario vai acessar para acessar o metodo. Ela mapeia uma url para podermos ver o resultado do metodo
     public function filmes()
     {
         $listaFilmes = $this->filmeRepository->findAll(); // irá procurar toda a lista de filmes
@@ -47,7 +47,7 @@ class FilmeController extends AbstractController
         $diretor = $this->diretorRepository->find($diretorId);
         $genero = $this->generoRepository->find($generoId);
         
-        if($diretor != null && $genero != null){
+        if($diretor != null && $genero != null && $filmeName != null){
             
             $filme = new Filme(); // instanciando um objeto chamado $filme
             $filme->setName($filmeName); //definindo o setName como o valor dentro do input filme em nosso front
