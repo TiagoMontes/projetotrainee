@@ -51,4 +51,22 @@ class GeneroController extends AbstractController
 
         return $this->redirect('/genero/lista');
     }
+
+    #[Route('/genero/editar', name: 'genero_editar', methods: ['POST'])]
+    public function editarGenero(Request $request)
+    {
+
+        $generoName = $request->request->get('genero'); //Estamos fazendo uma requisição para PEGAR 'genero' do front-end
+        $generoId = $request->request->get('id'); // Estamos requisitando o Id
+
+        $genero = $this->generoRepository->find($generoId); // vamos procurar o id no nosso banco de dados
+        $genero->setTitulo($generoName);// Após identificarmos o ID, definiremos o setTitulo sendo o nome puxando em $generoName pelo input
+
+        if($generoName != null){
+            $this->generoRepository->save($genero, true);
+        }
+
+        return $this->redirect('/genero/lista');
+
+    }
 }

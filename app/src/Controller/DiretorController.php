@@ -64,7 +64,7 @@ class DiretorController extends AbstractController
     public function editarDiretor(Request $request)
     {
         $diretorName = $request->request->get('diretor');
-        $diretorId = ($request->request->get('id')); 
+        $diretorId = $request->request->get('id'); 
 
         try {
             if($diretorName === "Tiago"){
@@ -77,7 +77,7 @@ class DiretorController extends AbstractController
         $diretor = $this->diretorRepository->find($diretorId);
         $diretor->setName($diretorName);
 
-        if($diretor && $diretorName){
+        if($diretorName != null){
             $this->diretorRepository->save($diretor, true);
         }
 

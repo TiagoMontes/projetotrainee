@@ -9,7 +9,7 @@ use App\Repository\DiretorRepository; // importa a classe diretor repository par
 use App\Repository\GeneroRepository; // importa a classe genero repository para poder usar os metodos dela
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Annotation\Route; // annotation é uma forma de definir rotas no symfony (não é obrigatório)
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 class FilmeController extends AbstractController  
 {
     public function __construct( private FilmeRepository $filmeRepository, private DiretorRepository $diretorRepository, private GeneroRepository $generoRepository ) { 
-        // o construtor é um metodo que é executado quando a classe é instanciada
+        // o construtor é um metodo que é executado quando a classe é instanciada. 
     }
     
     #[Route('/filme/lista', name: 'filme_list', methods: ['GET'])] // route é a rota que o usuario vai acessar para acessar o metodo. Ela mapeia uma url para podermos ver o resultado do metodo

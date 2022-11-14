@@ -15,7 +15,7 @@
         }
 
 
-        input {
+        input , button{
             margin: 10px 0;
             border: none;
         }
@@ -72,7 +72,7 @@
             align-items: center;
         }
 
-        #campo_genero{
+        .campo_genero{
             width: 450px;
             height: 36px;
             font-size: 18px;
@@ -81,7 +81,7 @@
             
         }
 
-        #botao{
+        .botao{
             width: 112px;
             height: 36px;
             font-size: 18px;
@@ -94,7 +94,7 @@
             transition: 0.5s ease;
         }
 
-        #botao:hover{
+        .botao:hover{
             background-color: #FBAB7E;
             color: white;
             border: 1px solid white;
@@ -107,20 +107,58 @@
     <div class="header">
         <h1>Gêneros dos filmes</h1>
         <form action="/genero/novo" method="POST">
-            <input type="text" name="genero" id="campo_genero"/>
+            <input type="text" name="genero" class="campo_genero"/>
             <input type="submit" id="botao" value="Adicionar" />
         </form>
+        Filtrar por: <input type="search" id="pesquisa" onkeyup="filtrar()" class="campo_genero">
     </div>
-    <ul>
-        <h2>Lista de Generos</h2>
+    <h2>Lista de Generos</h2>
+    <ul id="lista">
         {% for genero in generos %} {# "para cada genero em generos" #}
             <div class="list">
                 <li> {{genero.titulo}} </li>
-                <form action="/genero/delete" method="POST"> 
+                <form action="/genero/delete" method="POST" > 
                     <input type="hidden" name="id" value="{{ genero.id }}"/> {#Estamos identificado o ID do input que vamos excluir#}
-                    <input type="submit" id="botao" value="Remover"/>
+                    <input type="submit" class="botao" value="Remover"/>
                 </form>
+                <div class="form_edicao" id="form_edicao_{{genero.id}}" hidden>
+                    <form action="/genero/editar" method="POST">
+                        <input type="hidden" name="id" value="{{ genero.id }}"/>
+                        <input type="text" name="genero" class="campo_genero"/>
+                        <input type="submit" class="botao" value="editar"/>
+                    </form>
+                </div>
+                <button onclick="test({{genero.id}})" class="botao botao_editar">Edite!</button>
             </div>
         {% endfor %}
     </ul>
 </body>
+<script>
+
+    const lista = document.querySelector("#lista");
+    const itens = lista.querySelectorAll("li");
+
+
+    function test(genero_id) {
+        let form = document.querySelector("#form_edicao_" + genero_id);
+        form.hidden = ! form.hidden
+    }
+
+    // função para filtrar e mostrar apenas os generos que contem a letra digitada
+    function filtrar() {
+
+        let pesquisa = document.querySelector("#pesquisa").value;
+
+        for(let i = 0; i < itens.length; i++){
+            let item = itens[i];
+            let texto = item.textContent; 
+
+            if(texto.toLowerCase().indexOf(pesquisa.toLowerCase()) == -1){
+                item.parentNode.style.display = "none";
+            } else {
+                item.parentNode.style.display = "flex";
+            }
+        }
+    }
+
+</script>
