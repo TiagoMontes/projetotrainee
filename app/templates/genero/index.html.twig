@@ -108,9 +108,9 @@
         <h1>Gêneros dos filmes</h1>
         <form action="/genero/novo" method="POST">
             <input type="text" name="genero" class="campo_genero"/>
-            <input type="submit" id="botao" value="Adicionar" />
+            <input type="submit" class="botao" value="Adicionar" />
         </form>
-        Filtrar por: <input type="search" id="pesquisa" onkeyup="filtrar()" class="campo_genero">
+        <label>Filtrar: <input type="search" id="pesquisa" onkeyup="filtrar()" class="campo_genero"></label>
     </div>
     <h2>Lista de Generos</h2>
     <ul id="lista">
@@ -139,13 +139,13 @@
     const itens = lista.querySelectorAll("li");
 
 
-    function test(genero_id) {
+    const test = (genero_id) => {
         let form = document.querySelector("#form_edicao_" + genero_id);
         form.hidden = ! form.hidden
     }
 
     // função para filtrar e mostrar apenas os generos que contem a letra digitada
-    function filtrar() {
+    const filtrar = () => {
 
         let pesquisa = document.querySelector("#pesquisa").value;
 

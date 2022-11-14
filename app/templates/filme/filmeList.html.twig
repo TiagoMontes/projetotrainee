@@ -15,7 +15,7 @@
         }
 
 
-        input {
+        input , select{
             margin: 10px 0;
             border: none;
         }
@@ -69,7 +69,7 @@
             align-items: center;
         }
 
-        #campo_texto{
+        .campo_texto{
             width: 450px;
             height: 36px;
             font-size: 18px;
@@ -104,19 +104,22 @@
         <div class="header">
             <h1>Melhores filmes de 2022</h1>
             <form action="/filme/novo" method="POST">
-                <input type="text" name="filme" id="campo_texto" placeholder="Digite o nome do filme">
+                <input type="text" name="filme" class="campo_texto" placeholder="Digite o nome do filme">
                 <input type="submit" id="botao" value="Adicionar">
-                <select name="diretor" id="diretor">
+                <select name="diretor" id="botao">
                     {% for diretor in diretores%}
                         <option value={{diretor.id}}>{{diretor.name}}</option>
                     {% endfor %}
                 </select>
-                <select name="generoId" id="genero">
+                <select name="generoId" id="botao">
                     {% for genero in generos %}
                         <option value={{genero.id}}>{{genero.titulo}}</option>
                     {% endfor %}
                 </select>
             </form>
+            <label> 
+                Filtrar: <input type="search" id="pesquisa" class="campo_texto"/>
+            </label>
         </div>
         <h2>Lista de filmes</h2>
         <ul>    
@@ -134,5 +137,9 @@
         </ul>
     </body>
 </html>
+<script>
+
+    //Vamos mapear todas as listas para que o filtro consiga procurar em todos os padrões, seja filme, diretor ou genero
+</script>
 
 {# templates/lucky/number.html.twig #}

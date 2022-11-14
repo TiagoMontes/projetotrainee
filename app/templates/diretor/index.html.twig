@@ -61,6 +61,13 @@
             border-radius: 5px;
         }
 
+        .header{
+            display:flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items: center;
+        }
+
         .Cadastro{
             border: 1px solid #000;
         }
@@ -72,7 +79,7 @@
             align-items: center;
         }
 
-        #campo_diretor{
+        .campo_diretor{
             width: 450px;
             height: 36px;
             font-size: 18px;
@@ -107,11 +114,12 @@
     <div class="header">
         <h1>Os melhores diretores da última década</h1>
         <form action="/diretor/novo" method="POST">
-            <input type="text" name="diretor" id="campo_diretor"/>
+            <input type="text" name="diretor" class="campo_diretor"/>
             <input type="submit" class="botao" value="Adicionar" />
         </form>
+        <label>Filtrar: <input type="search" id="pesquisa" onkeyup="filtrar()" class="campo_diretor"></label>
     </div>
-    <ul>
+    <ul id="lista">
         <h2>Lista de diretores</h2>
         {% if erro %}
             <p>{{erro}}</p>
@@ -126,7 +134,7 @@
                 <div class="form_edicao" id="form_edicao_{{diretor.id}}" hidden>
                     <form action="/diretor/editar" method="POST">
                         <input type="hidden" name="id" value="{{ diretor.id }}"/> 
-                        <input type="text" name="diretor" id="campo_diretor"/>
+                        <input type="text" name="diretor" class="campo_diretor"/>
                         <input type="submit" class="botao" value="editar"/>
                     </form>
                 </div>
@@ -137,9 +145,28 @@
 </body>
 <script>
 
-    function test(diretor_id){
+    const lista = document.querySelector("#lista");
+    const itens = lista.querySelectorAll("li");
+
+    const test = (diretor_id) => {
         let form = document.querySelector("#form_edicao_"+diretor_id);
         form.hidden = !form.hidden
+    }
+
+    const filtrar = () => {
+        let pesquisa = document.querySelector("#pesquisa").value;
+
+        for(let i = 0; i < itens.length; i++){
+            let item = itens[i];
+            let texto = item.textContent;
+
+            if(texto.toLowerCase().indexOf(pesquisa.toLowerCase()) == -1){
+                item.parentNode.style.display = "none";
+            } else {
+                item.parentNode.style.display = "flex";
+            }
+        }
+
     }
     
 </script>
