@@ -118,16 +118,16 @@
                 </select>
             </form>
             <label> 
-                Filtrar: <input type="search" id="pesquisa" class="campo_texto" onkeyup="filtrar()"/>
+                Filtrar: <input type="search" id="pesquisa" class="campo_texto" oninput="filtrar()"/>
             </label>
         </div>
         <h2>Lista de filmes</h2>
-        <ul id="lista">    
+        <ul id="lista_filmes">    
             {% for filme in filmes %}  {# esta linha significa - para cada filme dentro de filmes, executaremos o codigo abaixo#}
-                <div class="list">               
-                    <li>{{filme.name}}</li>
-                    <li>{{filme.diretor.name}}</li>
-                    <li>{{filme.genero.titulo}}</li>
+                <div class="itens_filme">               
+                    <li class="atributo filtravel">{{filme.name}}</li>
+                    <li class="atributo filtravel">{{filme.diretor.name}}</li>
+                    <li class="atributo filtravel">{{filme.genero.titulo}}</li>
                     <form action="/filme/delete" method="POST">
                         <input type="hidden" name="id" value="{{ filme.id }}">
                         <input type="submit" id="botao" value="Remover">
@@ -140,27 +140,24 @@
 <script>
 
     //Vamos mapear todas as listas para que o filtro consiga procurar em todos os padrões, seja filme, diretor ou genero
-    const lista = document.querySelector("#lista");
-    const itens = lista.querySelectorAll("li");
+    const lista = document.querySelector("#lista_filmes");
+    const filtraveis = lista.querySelectorAll(".filtravel");
 
     const filtrar = () => {
+        const itens_filme = document.querySelectorAll(".itens_filme");
+        itens_filme.forEach((item) => {
+            item.style.display = "none";
+        })
 
+        let pesquisa = document.querySelector("#pesquisa").value.toLowerCase();
 
-
-        let pesquisa = document.querySelector("#pesquisa").value;
-
-        for(let i = 0; i < itens.length; i++){
-            let item = itens[i];
-            let texto = item.textContent;
-
-            if(texto.toLowerCase().includes(pesquisa.toLowerCase())){
-                item.parentNode.style.display = "flex";
-            } else {
-                item.parentNode.style.display = "none";
+        filtraveis.forEach((filtravel) => {
+            let nome = filtravel.innerText.toLowerCase();
+            if (nome.includes(pesquisa)) {
+                filtravel.parentNode.style.display = "flex";
             }
-        }
+        });
     }
-
 </script>
 
 {# templates/lucky/number.html.twig #}
