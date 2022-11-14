@@ -118,11 +118,11 @@
                 </select>
             </form>
             <label> 
-                Filtrar: <input type="search" id="pesquisa" class="campo_texto"/>
+                Filtrar: <input type="search" id="pesquisa" class="campo_texto" onkeyup="filtrar()"/>
             </label>
         </div>
         <h2>Lista de filmes</h2>
-        <ul>    
+        <ul id="lista">    
             {% for filme in filmes %}  {# esta linha significa - para cada filme dentro de filmes, executaremos o codigo abaixo#}
                 <div class="list">               
                     <li>{{filme.name}}</li>
@@ -140,6 +140,27 @@
 <script>
 
     //Vamos mapear todas as listas para que o filtro consiga procurar em todos os padrões, seja filme, diretor ou genero
+    const lista = document.querySelector("#lista");
+    const itens = lista.querySelectorAll("li");
+
+    const filtrar = () => {
+
+
+
+        let pesquisa = document.querySelector("#pesquisa").value;
+
+        for(let i = 0; i < itens.length; i++){
+            let item = itens[i];
+            let texto = item.textContent;
+
+            if(texto.toLowerCase().includes(pesquisa.toLowerCase())){
+                item.parentNode.style.display = "flex";
+            } else {
+                item.parentNode.style.display = "none";
+            }
+        }
+    }
+
 </script>
 
 {# templates/lucky/number.html.twig #}

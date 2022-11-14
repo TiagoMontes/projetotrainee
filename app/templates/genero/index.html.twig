@@ -141,22 +141,21 @@
 
     const test = (genero_id) => {
         let form = document.querySelector("#form_edicao_" + genero_id);
-        form.hidden = ! form.hidden
+        form.hidden = !form.hidden
     }
 
     // função para filtrar e mostrar apenas os generos que contem a letra digitada
     const filtrar = () => {
-
         let pesquisa = document.querySelector("#pesquisa").value;
 
         for(let i = 0; i < itens.length; i++){
             let item = itens[i];
             let texto = item.textContent; 
 
-            if(texto.toLowerCase().indexOf(pesquisa.toLowerCase()) == -1){
-                item.parentNode.style.display = "none";
-            } else {
+            if(texto.toLowerCase().includes(pesquisa.toLowerCase())){
                 item.parentNode.style.display = "flex";
+            } else {
+                item.parentNode.style.display = "none";
             }
         }
     }

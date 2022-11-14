@@ -154,16 +154,16 @@
     }
 
     const filtrar = () => {
-        let pesquisa = document.querySelector("#pesquisa").value;
+        let pesquisa = document.querySelector("#pesquisa").value.toLowerCase();
 
         for(let i = 0; i < itens.length; i++){
             let item = itens[i];
-            let texto = item.textContent;
+            let texto = item.textContent.toLowerCase();
 
-            if(texto.toLowerCase().indexOf(pesquisa.toLowerCase()) == -1){
-                item.parentNode.style.display = "none";
-            } else {
+            if(texto.includes(pesquisa)){
                 item.parentNode.style.display = "flex";
+            } else {
+                item.parentNode.style.display = "none";
             }
         }
 
