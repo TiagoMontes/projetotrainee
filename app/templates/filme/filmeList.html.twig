@@ -62,11 +62,15 @@
             border: 1px solid #000;
         }
 
-        .list{
-            display: flex;
+        .itens_filme{
+            display: block;
             justify-content: space-between;
             gap: 20px;
             align-items: center;
+            margin-bottom: 50px;
+            border: 2px solid #FBAB7E;
+            padding: 20px;
+            border-radius: 10px;
         }
 
         .campo_texto{
@@ -96,6 +100,11 @@
             color: white;
             border: 1px solid white;
 
+        }
+
+        .itens_critica{
+            display: flex;
+            flex-direction: column;
         }
 
     </style>
@@ -129,8 +138,12 @@
                     <li class="atributo filtravel">{{filme.diretor.name}}</li>
                     <li class="atributo filtravel">{{filme.genero.titulo}}</li>
                     <form action="/filme/delete" method="POST">
-                        <input type="hidden" name="id" value="{{ filme.id }}">
-                        <input type="submit" id="botao" value="Remover">
+                        <input type="hidden" name="id" value="{{ filme.id }}"/>
+                        <input type="submit" id="botao" value="Remover"/>
+                    </form>
+                    <form class="itens_critica">
+                        <input type="text" class="campo_texto" placeholder="Deixe sua nota de 0 a 5 e uma critica ao filme" />
+                        <input type="submit" value="Enviar" id="botao"/>
                     </form>
                 </div>
             {% endfor %}
@@ -154,7 +167,7 @@
         filtraveis.forEach((filtravel) => {
             let nome = filtravel.innerText.toLowerCase();
             if (nome.includes(pesquisa)) {
-                filtravel.parentNode.style.display = "flex";
+                filtravel.parentNode.style.display = "block";
             }
         });
     }
