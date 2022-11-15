@@ -113,9 +113,9 @@
         <label>Filtrar: <input type="search" id="pesquisa" oninput="filtrar()" class="campo_genero"></label>
     </div>
     <h2>Lista de Generos</h2>
-    <ul id="lista">
+    <ul id="lista_genero">
         {% for genero in generos %} {# "para cada genero em generos" #}
-            <div class="list">
+            <div class="itens_genero">
                 <li> {{genero.titulo}} </li>
                 <form action="/genero/delete" method="POST" > 
                     <input type="hidden" name="id" value="{{ genero.id }}"/> {#Estamos identificado o ID do input que vamos excluir#}
@@ -135,7 +135,7 @@
 </body>
 <script>
 
-    const lista = document.querySelector("#lista");
+    const lista = document.querySelector("#lista_genero");
     const itens = lista.querySelectorAll("li");
 
 
@@ -146,18 +146,20 @@
 
     // função para filtrar e mostrar apenas os generos que contem a letra digitada
     const filtrar = () => {
+        const itens_genero = document.querySelectorAll(".itens_genero");
+        itens.genero.forEach((item) => {
+            item.style.display = "none";
+        })
+
         let pesquisa = document.querySelector("#pesquisa").value;
 
-        for(let i = 0; i < itens.length; i++){
-            let item = itens[i];
-            let texto = item.textContent; 
-
-            if(texto.toLowerCase().includes(pesquisa.toLowerCase())){
+        itens.forEach((item) => {
+            let nome = item.innerText.toLowerCase();
+            if(nome.includes(pesquisa)){
                 item.parentNode.style.display = "flex";
-            } else {
-                item.parentNode.style.display = "none";
             }
-        }
+        })
+
     }
 
 </script>
