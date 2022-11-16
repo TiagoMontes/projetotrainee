@@ -73,6 +73,16 @@
             border-radius: 10px;
         }
 
+        .itens_critica{
+            display: block;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: center;
+            border: 2px solid #FBAB7E;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
         .campo_texto{
             width: 450px;
             height: 36px;
@@ -133,7 +143,7 @@
         <h2>Lista de filmes</h2>
         <ul id="lista_filmes">    
             {% for filme in filmes %}  {# esta linha significa - para cada filme dentro de filmes, executaremos o codigo abaixo#}
-                <div class="itens_filme">               
+                <div class="itens_filme">
                     <li class="atributo filtravel">{{filme.name}}</li>
                     <li class="atributo filtravel">{{filme.diretor.name}}</li>
                     <li class="atributo filtravel">{{filme.genero.titulo}}</li>
@@ -141,7 +151,7 @@
                         <input type="hidden" name="id" value="{{ filme.id }}"/>
                         <input type="submit" id="botao" value="Remover"/>
                     </form>
-                    <form class="itens_critica">
+                    <form action="" class="itens_critica">
                         <input type="text" class="campo_texto" placeholder="Deixe sua nota de 0 a 5 e uma critica ao filme" />
                         <input type="submit" value="Enviar" id="botao"/>
                     </form>

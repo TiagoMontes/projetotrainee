@@ -4,6 +4,8 @@
 namespace App\Entity;
 
 use App\Repository\FilmeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FilmeRepository::class)]
@@ -24,6 +26,10 @@ class Filme
     #[ORM\ManyToOne(inversedBy: 'Genero')]
     #[ORM\JoinColumn(nullable: false)] 
     private ?Genero $genero = null;
+
+    #[ORM\ManyToOne(inversedBy: 'texto')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Critica $texto = null;
 
     // as funções abaixo são getters e setters, que são responsáveis por pegar e definir os valores dos atributos da classe
 
@@ -64,6 +70,18 @@ class Filme
     public function setGenero(Genero $genero): self
     {
         $this->genero = $genero;
+
+        return $this;
+    }
+
+    public function getTexto(): ?Critica
+    {
+        return $this->texto;
+    }
+
+    public function setTexto(?Critica $texto): self
+    {
+        $this->texto = $texto;
 
         return $this;
     }
