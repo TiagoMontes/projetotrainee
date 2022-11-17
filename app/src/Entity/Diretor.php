@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
+use JsonSerializable;
 use App\Repository\DiretorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DiretorRepository::class)]
-class Diretor
+class Diretor implements JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -71,5 +72,10 @@ class Diretor
         }
 
         return $this;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return ["Nome"=>$this->getName(),"Id"=>$this->getId()];
     }
 }
