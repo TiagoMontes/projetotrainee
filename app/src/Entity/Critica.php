@@ -15,16 +15,11 @@ class Critica
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToMany(mappedBy: 'texto', targetEntity: Filme::class)]
-    private Collection $texto;
+    #[ORM\ManyToOne(inversedBy: 'criticas')] 
+    private Filme $filme;
 
     #[ORM\Column(length: 255)]
     private ?string $critica = null;
-
-    public function __construct()
-    {
-        $this->texto = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -43,34 +38,20 @@ class Critica
         return $this;
     }
     
-    /**
-     * @return Collection<int, Filme>
-     */
-    public function getTexto(): Collection
+
+    public function getFilme(): Filme
     {
-        return $this->texto;
+        return $this->filme;
     }
 
-    public function addTexto(Filme $texto): self
+    public function setFilme(Filme $filme) 
     {
-        if (!$this->texto->contains($texto)) {
-            $this->texto->add($texto);
-            $texto->setTexto($this);
-        }
+        $this->filme = $filme;
 
         return $this;
     }
 
-    public function removeTexto(Filme $texto): self
-    {
-        if ($this->texto->removeElement($texto)) {
-            // set the owning side to null (unless already changed)
-            if ($texto->getTexto() === $this) {
-                $texto->setTexto(null);
-            }
-        }
 
-        return $this;
-    }
+
 
 }

@@ -27,11 +27,15 @@ class Filme
     #[ORM\JoinColumn(nullable: false)] 
     private ?Genero $genero = null;
 
-    #[ORM\ManyToOne(inversedBy: 'texto')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Critica $texto = null;
+    #[ORM\OneToMany(mappedBy: 'filme', targetEntity: Critica::class)]
+    private Collection $criticas;
 
     // as funções abaixo são getters e setters, que são responsáveis por pegar e definir os valores dos atributos da classe
+
+    public function __construct()
+    {
+        $this->criticas = new ArrayCollection();
+    }
 
     public function getId(): ?int // retorna o id
     {
@@ -74,15 +78,37 @@ class Filme
         return $this;
     }
 
-    public function getTexto(): ?Critica
+    /**
+     * @return Collection<int, Filme>
+     */
+    public function getCriticas(): Collection
     {
-        return $this->texto;
+        return $this->criticas;
     }
 
-    public function setTexto(?Critica $texto): self
+    public function addCritica(Critica $critica): self
     {
-        $this->texto = $texto;
+        if (!$this->criticas->contains($critica)) {
+            $this->criticas->add($critica);
+            $critica->setFilme($this);
+        }
 
         return $this;
     }
+
+    public function removeCritica(Critica $critica): self
+    {
+        if ($this->criticas->removeElement($critica)) {
+            // set the owning side to null (unless already changed)
+            if ($critica->getFilme() === $this) {
+                $critica->setFilme(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+
 }

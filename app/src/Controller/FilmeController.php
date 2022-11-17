@@ -5,6 +5,7 @@ namespace App\Controller; // namespace é o caminho do arquivo
 
 use App\Entity\Filme;
 use App\Repository\FilmeRepository;
+use App\Repository\CriticaRepository;
 use App\Repository\DiretorRepository; // importa a classe diretor repository para poder usar os metodos dela
 use App\Repository\GeneroRepository; // importa a classe genero repository para poder usar os metodos dela
 use Doctrine\ORM\Mapping\Id;
@@ -16,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 // a classe abaixo é um controller, que é uma metodo que recebe uma requisição e retorna uma resposta
 class FilmeController extends AbstractController  
 {
-    public function __construct( private FilmeRepository $filmeRepository, private DiretorRepository $diretorRepository, private GeneroRepository $generoRepository ) { 
+    public function __construct( private FilmeRepository $filmeRepository, private DiretorRepository $diretorRepository, private GeneroRepository $generoRepository, private CriticaRepository $criticaRepository) { 
         // o construtor é um metodo que é executado quando a classe é instanciada. 
     }
     
@@ -47,12 +48,13 @@ class FilmeController extends AbstractController
         $diretor = $this->diretorRepository->find($diretorId);
         $genero = $this->generoRepository->find($generoId);
         
-        if($diretor != null && $genero != null && $filmeName != null){
+        if($diretor != null && $genero != null && $filmeName != null ){
             
             $filme = new Filme(); // instanciando um objeto chamado $filme
             $filme->setName($filmeName); //definindo o setName como o valor dentro do input filme em nosso front
             $filme->setDiretor($diretor);
             $filme->setGenero($genero);
+
             $this->filmeRepository->save($filme, true);
         }
         
@@ -71,5 +73,4 @@ class FilmeController extends AbstractController
         
         return $this->redirect('/filme/lista');
     }
-    
 }

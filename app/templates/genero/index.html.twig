@@ -65,7 +65,7 @@
             border: 1px solid #000;
         }
 
-        .list{
+        .itens_genero{
             display: flex;
             justify-content: space-between;
             gap: 20px;
@@ -116,7 +116,7 @@
     <ul id="lista_genero">
         {% for genero in generos %} {# "para cada genero em generos" #}
             <div class="itens_genero">
-                <li> {{genero.titulo}} </li>
+                <li class="atributo filtravel"> {{genero.titulo}} </li>
                 <form action="/genero/delete" method="POST" > 
                     <input type="hidden" name="id" value="{{ genero.id }}"/> {#Estamos identificado o ID do input que vamos excluir#}
                     <input type="submit" class="botao" value="Remover"/>
@@ -136,7 +136,7 @@
 <script>
 
     const lista = document.querySelector("#lista_genero");
-    const itens = lista.querySelectorAll("li");
+    const itens = lista.querySelectorAll(".filtravel");
 
     // form de edição fica visível ou não
     const test = (genero_id) => {
@@ -147,11 +147,11 @@
     // função para filtrar e mostrar apenas os generos que contem a letra digitada
     const filtrar = () => {
         const itens_genero = document.querySelectorAll(".itens_genero");
-        itens.genero.forEach((item) => {
+        itens_genero.forEach((item) => {
             item.style.display = "none";
         })
 
-        let pesquisa = document.querySelector("#pesquisa").value;
+        let pesquisa = document.querySelector("#pesquisa").value.toLowerCase();
 
         itens.forEach((item) => {
             let nome = item.innerText.toLowerCase();

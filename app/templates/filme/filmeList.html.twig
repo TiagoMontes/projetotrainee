@@ -151,8 +151,12 @@
                         <input type="hidden" name="id" value="{{ filme.id }}"/>
                         <input type="submit" id="botao" value="Remover"/>
                     </form>
-                    <form action="" class="itens_critica">
-                        <input type="text" class="campo_texto" placeholder="Deixe sua nota de 0 a 5 e uma critica ao filme" />
+                    {% for critica in filme.criticas %}
+                        <p>{{critica.critica}}</p>
+                    {% endfor %}
+                    <form action="/critica/novo" class="itens_critica" method="POST">
+                        <input type="hidden" name="filme_id" value="{{ filme.id }}"/>
+                        <input type="text" name="critica" class="campo_texto" placeholder="Deixe sua nota de 0 a 5 e uma critica ao filme" />
                         <input type="submit" value="Enviar" id="botao"/>
                     </form>
                 </div>
