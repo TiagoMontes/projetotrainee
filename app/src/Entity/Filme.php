@@ -20,9 +20,9 @@ class Filme implements JsonSerializable
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'filmes')] // many to one é um relacionamento de muitos para um, onde um diretor pode ter varios filmes
-    #[ORM\JoinColumn(nullable: false)] // join column é uma coluna que irá fazer o relacionamento entre as tabelas
-    private ?Diretor $diretor = null; // diretor é o nome da classe que representa a tabela diretor
+    #[ORM\ManyToOne(inversedBy: 'filmes')]
+    #[ORM\JoinColumn(nullable: false)] 
+    private ?Diretor $diretor = null;
 
     #[ORM\ManyToOne(inversedBy: 'Genero')]
     #[ORM\JoinColumn(nullable: false)] 
