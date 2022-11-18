@@ -21,4 +21,12 @@ class GeneroAPIController extends AbstractController
 
         return new JsonResponse($genero);
     }
+
+    #[Route('/genero/api/find/{id}', methods: ['GET'])]
+    public function find(string $id){
+
+        $genero = $this->generoRepository->find($id);
+
+        return new JsonResponse($genero);
+    }
 }
