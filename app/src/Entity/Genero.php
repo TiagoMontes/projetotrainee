@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
+use JsonSerializable;
 use App\Repository\GeneroRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GeneroRepository::class)]
-class Genero
+class Genero implements JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -63,5 +64,10 @@ class Genero
         }
 
         return $this;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return ["Titulo"=>$this->getTitulo(),"Id"=>$this->getId()];
     }
 }

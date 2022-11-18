@@ -20,7 +20,7 @@ class CriticaController extends AbstractController
     #[Route('/critica', name: 'app_critica', methods: ['GET'])]
     public function critica(): Response
     {
-        $listaDiretores = $this->diretorRepository->findAll();
+        $listaDiretores = $this->criticaRepository->findAll();
         return $this->render('critica/index.html.twig', [
             'controller_name' => 'CriticaController',
         ]);
