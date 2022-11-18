@@ -2,9 +2,9 @@
 
 namespace App\Controller\API;
 
-use App\Repository\CriticaRepository; // importa a classe diretor repository para poder usar os metodos dela
+use App\Repository\CriticaRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route; // annotation é uma forma de definir rotas no symfony (não é obrigatório)
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,7 +16,7 @@ class CriticaAPIController extends AbstractController
 
     }
 
-    #[Route('/genero/api/findall', methods: ['GET'])]
+    #[Route('/critica/api/findall', methods: ['GET'])]
     public function findAll(){
 
         $critica = $this->criticaRepository->findAll();
@@ -24,7 +24,7 @@ class CriticaAPIController extends AbstractController
         return new JsonResponse($critica);
     }
 
-    #[Route('/genero/api/findall', methods: ['GET'])]
+    #[Route('/critica/api/find/{id}', methods: ['GET'])]
     public function find($id){
 
         $critica = $this->criticaRepository->find($id);

@@ -3,13 +3,14 @@
 
 namespace App\Entity;
 
+use JsonSerializable;
 use App\Repository\FilmeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FilmeRepository::class)]
-class Filme
+class Filme implements JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -109,6 +110,9 @@ class Filme
     }
 
 
-
+    public function jsonSerialize(): array
+    {
+        return ["Filme"=>$this->getName(),"Id"=>$this->getId()];
+    }
 
 }
