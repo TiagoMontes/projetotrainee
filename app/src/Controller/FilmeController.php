@@ -29,8 +29,8 @@ class FilmeController extends AbstractController
         $listaGeneros = $this->generoRepository->findAll(); // irá procurar toda a lista de generos
 
         return $this->render('filme/filmeList.html.twig', [
-            'filmes' => $listaFilmes,
-            'diretores' => $listaDiretores,
+            'filmes' => $listaFilmes, 
+            'diretores' => $listaDiretores, 
             'generos' => $listaGeneros,
         ]);
     }
@@ -42,11 +42,11 @@ class FilmeController extends AbstractController
 
         // estamos pegando dados da request, poderiamos resolver com formType
         $filmeName = $request->request->get('filme');
-        $diretorId = $request->request->get('diretor');
+        $diretorId = $request->request->get('diretor'); // para trazermos o value do select, precisamos passar o name do select
         $generoId = $request->request->get('generoId');
         
-        $diretor = $this->diretorRepository->find($diretorId);
-        $genero = $this->generoRepository->find($generoId);
+        $diretor = $this->diretorRepository->find($diretorId); // irá procurar o diretor pelo id, que foi passado na request acima atraves do input diretor.
+        $genero = $this->generoRepository->find($generoId); 
         
         if($diretor != null && $genero != null && $filmeName != null ){
             

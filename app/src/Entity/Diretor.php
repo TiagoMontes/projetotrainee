@@ -8,8 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: DiretorRepository::class)]
-class Diretor implements JsonSerializable
+#[ORM\Entity(repositoryClass: DiretorRepository::class)] //DiretorRepository é a classe que gerencia a entidade Diretor no banco de dados, ela é uma boa pratica para separar as responsabilidades de cada classe e facilitar a manutenção do código.
+class Diretor implements JsonSerializable 
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -1,5 +1,4 @@
 <?php
-//Entity é uma classe que representa uma tabela do banco de dados, ela é responsável por definir os atributos da tabela e os seus tipos, além de definir os relacionamentos entre as tabelas. 
 
 namespace App\Entity;
 
@@ -20,16 +19,16 @@ class Filme implements JsonSerializable
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'filmes')]
+    #[ORM\ManyToOne(inversedBy: 'filmes')] // a relação many
     #[ORM\JoinColumn(nullable: false)] 
     private ?Diretor $diretor = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Genero')]
+    #[ORM\ManyToOne(inversedBy: 'Genero')] 
     #[ORM\JoinColumn(nullable: false)] 
     private ?Genero $genero = null;
 
-    #[ORM\OneToMany(mappedBy: 'filme', targetEntity: Critica::class)]
-    private Collection $criticas;
+    #[ORM\OneToMany(mappedBy: 'filme', targetEntity: Critica::class)] // 
+    private Collection $criticas;  // Collection é uma classe do Doctrine que representa uma coleção de objetos, no caso uma coleção de objetos do tipo Critica, que é a entidade que representa a tabela crítica no banco de dados.
 
     // as funções abaixo são getters e setters, que são responsáveis por pegar e definir os valores dos atributos da classe
 
@@ -60,7 +59,7 @@ class Filme implements JsonSerializable
         return $this->diretor;
     }
 
-    public function setDiretor(?Diretor $diretor): self
+    public function setDiretor(?Diretor $diretor): self 
     {
         $this->diretor = $diretor;
 
@@ -80,7 +79,7 @@ class Filme implements JsonSerializable
     }
 
     /**
-     * @return Collection<int, Filme>
+     * @return Collection<int, Filme> 
      */
     public function getCriticas(): Collection
     {

@@ -40,7 +40,7 @@ class DiretorController extends AbstractController
         }
 
         if($diretorName != null){
-            $diretor = new Diretor();
+            $diretor = new Diretor(); 
             $diretor->setName($diretorName);
             $this->diretorRepository->save($diretor, true);
         }

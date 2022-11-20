@@ -31,7 +31,4 @@ class FilmeAPIController extends AbstractController
         return new JsonResponse($filmes);
     }
 
-
-
-
 }

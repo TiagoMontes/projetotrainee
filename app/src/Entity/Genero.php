@@ -1,5 +1,7 @@
 <?php
 
+// Uma entidade é uma classe que representa uma tabela do banco de dados, ela é responsável por definir os atributos da tabela e os seus tipos, além de definir os relacionamentos entre as tabelas. 
+
 namespace App\Entity;
 
 use JsonSerializable;
@@ -19,7 +21,7 @@ class Genero implements JsonSerializable
     #[ORM\Column(length: 255)]
     private ?string $titulo = null;
 
-    #[ORM\OneToMany(mappedBy: 'genero', targetEntity: Filme::class)]
+    #[ORM\OneToMany(mappedBy: 'genero', targetEntity: Filme::class)] // temos uma relação de um para muitos, ou seja, um gênero pode ter vários filmes. targetEntity é a entidade que está sendo relacionada, no caso, a entidade Filme e mappedBy é o atributo que está sendo relacionado, no caso, o atributo genero da entidade Filme
     private Collection $filme;
 
     public function __construct()
