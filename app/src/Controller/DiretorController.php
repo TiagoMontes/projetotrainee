@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Diretor;
 use App\Repository\DiretorRepository;
+use App\Service\DiretorService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DiretorController extends AbstractController
 {
-    public function __construct( private DiretorRepository $diretorRepository) {
+    public function __construct( private DiretorRepository $diretorRepository, private DiretorService $diretorService) {
     }
 
     #[Route('/diretor/lista/{erro}', name: 'diretor_list', methods: ['GET'])]
@@ -30,21 +31,16 @@ class DiretorController extends AbstractController
     public function novoDiretor(Request $request)
     {
         $diretorName = $request->request->get('diretor');
+        $this->diretorService->gerarDiretor($diretorName);
 
-        try {
-            if($diretorName === "Tiago"){
-                throw new \Exception("Tiago não pode ser diretor");     
-            }
-        } catch (\Exception $e) {
-            return $this->redirectToRoute('diretor_list', ["erro"=>$e->getMessage()]);
-        }
-
-        if($diretorName != null){
-            $diretor = new Diretor(); 
-            $diretor->setName($diretorName);
-            $this->diretorRepository->save($diretor, true);
-        }
-
+        // ex de try catch
+        // try {
+        //     if($diretorName === "Tiago"){
+        //         throw new \Exception("Tiago não pode ser diretor");     
+        //     }
+        // } catch (\Exception $e) {
+        //     return $this->redirectToRoute('diretor_list', ["erro"=>$e->getMessage()]);
+        // }
         return $this->redirect('/diretor/lista');
     }
 
