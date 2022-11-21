@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Genero;
 use App\Repository\GeneroRepository;
+use App\Service\GeneroService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class GeneroController extends AbstractController
 {
-    public function __construct( private GeneroRepository $generoRepository) {
+    public function __construct( private GeneroRepository $generoRepository, private GeneroService $generoService) {
     }
 
     #[Route('/genero/lista', name: 'genero_list', methods: ['GET'])]
@@ -28,16 +29,11 @@ class GeneroController extends AbstractController
     public function novoGenero(Request $request)
     {
         $generoName = $request->request->get('genero');
-
-
-        if($generoName != null){
-            $genero = new Genero();
-            $genero->setTitulo($generoName);
-            $this->generoRepository->save($genero, true);
-        }
+        $this->generoService->gerarGenero($generoName);
 
         return $this->redirect('/genero/lista');
     }
+
 
     #[Route('/genero/delete', name: 'genero_delete', methods: ['POST'])] 
     public function deleteGenero(Request $request)

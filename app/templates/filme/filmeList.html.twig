@@ -20,14 +20,23 @@
         }
 
         #botao{
-            border: 1px solid black;
-            background-color: white;
-            padding: 5px;
+            padding: 8px;
             border-radius: 5px;
+            font-weight: bold;
 
             cursor: pointer;
         }
 
+        .botao_remover{
+            background-color: white;
+
+            transition: 1s ease-out;
+        }
+
+        .botao_remover:hover{
+            background-color: red;
+            color: white;
+        }
 
         .header{
 
@@ -72,8 +81,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-
-            border: 2px solid black;
             padding: 10px;
         }
 
@@ -82,7 +89,7 @@
         }
         
         .filtravel{
-            border: 1px solid black;
+            border: 2px solid black;
             padding: 10px 20px;
             margin-bottom: 20px;
             width: 500px;
@@ -97,6 +104,7 @@
             justify-content: center;
 
             border: 2px solid black;
+            border-radius: 20px;
             margin: 10px 0 10px 0;
             padding: 30px;
         }
@@ -170,7 +178,7 @@
                     
                         <form action="/filme/delete" method="POST">
                             <input type="hidden" name="id" value="{{ filme.id }}"/>
-                            <input type="submit" id="botao" value="Remover"/>
+                            <input type="submit" id="botao" class="botao_remover" value="Remover"/>
                         </form>
 
 
