@@ -2,6 +2,7 @@
 
 namespace App\Service;
 use App\Repository\GeneroRepository;
+use App\Entity\Genero;
 
 class GeneroService
 {
