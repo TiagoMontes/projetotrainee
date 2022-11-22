@@ -5,13 +5,13 @@
 namespace App\Entity;
 
 use JsonSerializable;
-use App\Repository\GeneroRepository;
+use App\Repository\GenreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: GeneroRepository::class)]
-class Genero implements JsonSerializable
+#[ORM\Entity(repositoryClass: GenreRepository::class)]
+class Genre implements JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,9 +19,9 @@ class Genero implements JsonSerializable
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $titulo = null;
+    private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'genero', targetEntity: Movie::class)] // temos uma relação de um para muitos, ou seja, um gênero pode ter vários filmes. targetEntity é a entidade que está sendo relacionada, no caso, a entidade Filme e mappedBy é o atributo que está sendo relacionado, no caso, o atributo genero da entidade Filme
+    #[ORM\OneToMany(mappedBy: 'genre', targetEntity: Movie::class)] // temos uma relação de um para muitos, ou seja, um gênero pode ter vários filmes. targetEntity é a entidade que está sendo relacionada, no caso, a entidade Filme e mappedBy é o atributo que está sendo relacionado, no caso, o atributo genero da entidade Filme
     private Collection $Movie;
 
     public function __construct()
@@ -34,14 +34,14 @@ class Genero implements JsonSerializable
         return $this->id;
     }
 
-    public function getTitulo(): ?string
+    public function getName(): ?string
     {
-        return $this->titulo;
+        return $this->name;
     }
 
-    public function setTitulo(string $titulo): self
+    public function setName(string $name): self
     {
-        $this->titulo = $titulo;
+        $this->name = $name;
 
         return $this;
     }

@@ -106,7 +106,7 @@
 <body>
     <div class="header">
         <h1>Gêneros dos filmes</h1>
-        <form action="/genero/novo" method="POST">
+        <form action="/genre/new" method="POST">
             <input type="text" name="genero" class="campo_genero"/>
             <input type="submit" class="botao" value="Adicionar" />
         </form>
@@ -114,29 +114,29 @@
     </div>
     <h2>Lista de Generos</h2>
     <ul id="lista_genero">
-        {% for genero in generos %} {# "para cada genero em generos" #}
+        {% for genre in genres %} {# "para cada genero em generos" #}
             <div class="itens_genero">
-                <li class="atributo filtravel"> {{genero.titulo}} </li>
-                <form action="/genero/delete" method="POST" > 
-                    <input type="hidden" name="id" value="{{ genero.id }}"/> {#Estamos identificado o ID do input que vamos excluir#}
+                <li class="atributo filtravel"> {{genre.name}} </li>
+                <form action="/genre/delete" method="POST" > 
+                    <input type="hidden" name="id" value="{{ genre.id }}"/> {#Estamos identificado o ID do input que vamos excluir#}
                     <input type="submit" class="botao" value="Remover"/>
                 </form>
-                <div class="form_edicao" id="form_edicao_{{genero.id}}" hidden>
-                    <form action="/genero/editar" method="POST">
-                        <input type="hidden" name="id" value="{{ genero.id }}"/>
+                <div class="form_edicao" id="form_edicao_{{genre.id}}" hidden>
+                    <form action="/genre/edit" method="POST">
+                        <input type="hidden" name="id" value="{{ genre.id }}"/>
                         <input type="text" name="genero" class="campo_genero"/>
                         <input type="submit" class="botao" value="editar"/>
                     </form>
                 </div>
-                <button onclick="test({{genero.id}})" class="botao botao_editar">Edite!</button>
+                <button onclick="test({{genre.id}})" class="botao botao_editar">Edite!</button>
             </div>
         {% endfor %}
     </ul>
 </body>
 <script>
 
-    const lista = document.querySelector("#lista_genero");
-    const itens = lista.querySelectorAll(".filtravel");
+    const list = document.querySelector("#lista_genero");
+    const itens = list.querySelectorAll(".filtravel");
 
     // form de edição fica visível ou não
     const test = (genero_id) => {

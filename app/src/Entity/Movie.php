@@ -23,9 +23,9 @@ class Movie implements JsonSerializable
     #[ORM\JoinColumn(nullable: false)] 
     private ?Director $director = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Genero')] 
+    #[ORM\ManyToOne(inversedBy: 'movie')] 
     #[ORM\JoinColumn(nullable: false)] 
-    private ?Genero $genero = null;
+    private ?Genre $genre = null;
 
     #[ORM\OneToMany(mappedBy: 'movie', targetEntity: Critica::class)] // 
     private Collection $criticas;  // Collection é uma classe do Doctrine que representa uma coleção de objetos, no caso uma coleção de objetos do tipo Critica, que é a entidade que representa a tabela crítica no banco de dados.
@@ -66,14 +66,14 @@ class Movie implements JsonSerializable
         return $this;
     }
 
-    public function getGenero(): Genero
+    public function getGenre(): Genre
     {
-        return $this->genero;
+        return $this->genre;
     }
 
-    public function setGenero(Genero $genero): self
+    public function setGenre(Genre $genre): self
     {
-        $this->genero = $genero;
+        $this->genre = $genre;
 
         return $this;
     }

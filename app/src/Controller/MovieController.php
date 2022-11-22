@@ -8,7 +8,7 @@ use App\Service\MovieService;
 use App\Repository\MovieRepository;
 use App\Repository\CriticaRepository;
 use App\Repository\DirectorRepository; // importa a classe diretor repository para poder usar os metodos dela
-use App\Repository\GeneroRepository; // importa a classe genero repository para poder usar os metodos dela
+use App\Repository\GenreRepository; // importa a classe genero repository para poder usar os metodos dela
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route; // annotation é uma forma de definir rotas no symfony (não é obrigatório)
@@ -18,21 +18,21 @@ use Symfony\Component\HttpFoundation\Request;
 // a classe abaixo é um controller, que é uma metodo que recebe uma requisição e retorna uma resposta
 class MovieController extends AbstractController  
 {
-    public function __construct( private MovieRepository $movieRepository, private DirectorRepository $directorRepository, private GeneroRepository $generoRepository, private CriticaRepository $criticaRepository, private MovieService $movieService) { 
+    public function __construct( private MovieRepository $movieRepository, private DirectorRepository $directorRepository, private GenreRepository $genreRepository, private CriticaRepository $criticaRepository, private MovieService $movieService) { 
         // o construtor é um metodo que é executado quando a classe é instanciada. 
     }
     
     #[Route('/movie/list', name: 'film_list', methods: ['GET'])] // route é a rota que o usuario vai acessar para acessar o metodo. Ela mapeia uma url para podermos ver o resultado do metodo
     public function films()
     {
-        $listFilms = $this->movieRepository->findAll(); // irá procurar toda a lista de filmes
-        $listDirectors = $this->directorRepository->findAll(); // irá procurar toda a lista de diretores
-        $listaGeneros = $this->generoRepository->findAll(); // irá procurar toda a lista de generos
+        $moviesList = $this->movieRepository->findAll(); // irá procurar toda a lista de filmes
+        $directosList = $this->directorRepository->findAll(); // irá procurar toda a lista de diretores
+        $genresList = $this->genreRepository->findAll(); // irá procurar toda a lista de generos
 
         return $this->render('movie/index.html.twig', [
-            'films' => $listFilms, 
-            'directors' => $listDirectors, 
-            'generos' => $listaGeneros,
+            'films' => $moviesList, 
+            'directors' => $directosList, 
+            'genres' => $genresList,
         ]);
     }
 
@@ -42,9 +42,9 @@ class MovieController extends AbstractController
     {
         $name = $request->request->get('movie');
         $directorId = $request->request->get('directorId');
-        $generoId = $request->request->get('generoId');
+        $genreId = $request->request->get('generoId');
         
-        $this->movieService->generateMovie($name, $directorId, $generoId);
+        $this->movieService->generateMovie($name, $directorId, $genreId);
         
         return $this->redirect('/movie/list');
     }

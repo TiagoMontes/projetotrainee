@@ -3,14 +3,14 @@
 namespace App\Service;
 use App\Repository\MovieRepository;
 use App\Repository\DirectorRepository;
-use App\Repository\GeneroRepository;
+use App\Repository\GenreRepository;
 use App\Entity\Movie;
-use App\Entity\Diretor;
-use App\Entity\Genero;
+use App\Entity\Director;
+use App\Entity\Genre;
 
 class MovieService
 {
-    public function __construct(private MovieRepository $movieRepository, private DirectorRepository $directorRepository, private GeneroRepository $generoRepository)
+    public function __construct(private MovieRepository $movieRepository, private DirectorRepository $directorRepository, private GenreRepository $genreRepository)
     {
 
     }
@@ -19,12 +19,12 @@ class MovieService
     {
         if($this->canGenerateMovie($name, $directorId, $generoId)){
             $director = $this->directorRepository->find($directorId);
-            $genero = $this->generoRepository->find($generoId);
+            $genero = $this->genreRepository->find($generoId);
 
             $movie = new Movie();
             $movie->setName($name);
             $movie->setDirector($director);
-            $movie->setGenero($genero);
+            $movie->setGenre($genero);
             $this->movieRepository->save($movie, true);
         }
     }

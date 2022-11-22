@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Genero;
+use App\Entity\Genre;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,14 +14,14 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Genero[]    findAll()
  * @method Genero[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class GeneroRepository extends ServiceEntityRepository
+class GenreRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Genero::class);
+        parent::__construct($registry, Genre::class);
     }
 
-    public function save(Genero $entity, bool $flush = false): void
+    public function save(Genre $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity); // vc nao precisa saber disso aqui, segue o baile
 
@@ -30,7 +30,7 @@ class GeneroRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Genero $entity, bool $flush = false): void
+    public function remove(Genre $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 

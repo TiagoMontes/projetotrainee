@@ -153,8 +153,8 @@
                     {% endfor %}
                 </select>
                 <select name="generoId" id="botao">
-                    {% for genero in generos %}
-                        <option value={{genero.id}}>{{genero.titulo}}</option>
+                    {% for genre in genres %}
+                        <option value={{genre.id}}>{{genre.name}}</option>
                     {% endfor %}
                 </select>
                 <input type="submit" id="botao" value="Adicionar">
@@ -174,7 +174,7 @@
                     <div class="itens_filme">
                         <li class="filtravel">Filme: <span>{{movie.name}}</span></li>
                         <li class="filtravel">Diretor: <span>{{movie.director.name}}</span></li>
-                        <li class="filtravel">Gênero: <span>{{movie.genero.titulo}}</span></li>
+                        <li class="filtravel">Gênero: <span>{{movie.genre.name}}</span></li>
                     
                         <form action="/movie/delete" method="POST">
                             <input type="hidden" name="id" value="{{ movie.id }}"/>
