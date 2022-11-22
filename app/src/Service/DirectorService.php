@@ -10,16 +10,16 @@ class DirectorService
 
     }
 
-    public function gerarDiretor(string $name):void
+    public function generateDirector(string $name):void
     {
-        if($this->podeGerarDiretor($name)){
+        if($this->canGenerateDirector($name)){
             $director = new Director();
             $director->setName($name);
             $this->directorRepository->save($director, true);
         }
     }
 
-    public function podeGerarDiretor(string $name): bool
+    public function canGenerateDirector(string $name): bool
     {
         if($name == null){
             return false;

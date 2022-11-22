@@ -31,7 +31,7 @@ class DirectorController extends AbstractController
     public function novoDirector(Request $request)
     {
         $directorName = $request->request->get('director');
-        $this->directorService->gerarDiretor($directorName);
+        $this->directorService->generateDirector($directorName);
 
         // ex de try catch
         // try {

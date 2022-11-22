@@ -31,7 +31,7 @@ class MovieController extends AbstractController
 
         return $this->render('movie/index.html.twig', [
             'films' => $listFilms, 
-            'directors' => $listaDirectors, 
+            'directors' => $listDirectors, 
             'generos' => $listaGeneros,
         ]);
     }
@@ -44,7 +44,7 @@ class MovieController extends AbstractController
         $directorId = $request->request->get('directorId');
         $generoId = $request->request->get('generoId');
         
-        $this->movieService->gerarFilme($name, $directorId, $generoId);
+        $this->movieService->generateMovie($name, $directorId, $generoId);
         
         return $this->redirect('/movie/list');
     }
