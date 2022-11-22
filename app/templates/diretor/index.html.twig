@@ -124,32 +124,32 @@
         {% if erro %}
             <p>{{erro}}</p>
         {% endif %}
-        {% for diretor in diretores %} {# "para cada diretor em diretores" #}
+        {% for director in directors %} {# "para cada diretor em diretores" #}
             <div class="list">
-                <li> {{diretor.name}} </li>
+                <li> {{director.name}} </li>
                 <form action="/diretor/delete" method="POST"> 
-                    <input type="hidden" name="id" value="{{ diretor.id }}"/> {#Estamos identificado o ID do input que vamos excluir#}
+                    <input type="hidden" name="id" value="{{ director.id }}"/> {#Estamos identificado o ID do input que vamos excluir#}
                     <input type="submit" class="botao" value="Remover"/>
                 </form>
-                <div class="form_edicao" id="form_edicao_{{diretor.id}}" hidden>
+                <div class="form_edicao" id="form_edicao_{{director.id}}" hidden>
                     <form action="/diretor/editar" method="POST">
-                        <input type="hidden" name="id" value="{{ diretor.id }}"/> 
+                        <input type="hidden" name="id" value="{{ director.id }}"/> 
                         <input type="text" name="diretor" class="campo_diretor"/>
                         <input type="submit" class="botao" value="editar"/>
                     </form>
                 </div>
-                <button onclick="test({{diretor.id}})" class="botao botao_editar" >Edite!</button>
+                <button onclick="test({{director.id}})" class="botao botao_editar" >Edite!</button>
             </div>
         {% endfor %}
     </ul>
 </body>
 <script>
 
-    const lista = document.querySelector("#lista");
+    const list = document.querySelector("#lista");
     const itens = lista.querySelectorAll("li");
 
     const test = (diretor_id) => {
-        let form = document.querySelector("#form_edicao_"+diretor_id);
+        let form = document.querySelector("#form_edicao_"+director_id);
         form.hidden = !form.hidden
     }
 

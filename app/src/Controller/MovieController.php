@@ -22,22 +22,22 @@ class MovieController extends AbstractController
         // o construtor é um metodo que é executado quando a classe é instanciada. 
     }
     
-    #[Route('/movie/list', name: 'filme_list', methods: ['GET'])] // route é a rota que o usuario vai acessar para acessar o metodo. Ela mapeia uma url para podermos ver o resultado do metodo
+    #[Route('/movie/list', name: 'film_list', methods: ['GET'])] // route é a rota que o usuario vai acessar para acessar o metodo. Ela mapeia uma url para podermos ver o resultado do metodo
     public function films()
     {
-        $listaFilmes = $this->movieRepository->findAll(); // irá procurar toda a lista de filmes
+        $listFilms = $this->movieRepository->findAll(); // irá procurar toda a lista de filmes
         $listaDiretores = $this->diretorRepository->findAll(); // irá procurar toda a lista de diretores
         $listaGeneros = $this->generoRepository->findAll(); // irá procurar toda a lista de generos
 
-        return $this->render('filme/filmeList.html.twig', [
-            'films' => $listaFilmes, 
+        return $this->render('movie/index.html.twig', [
+            'films' => $listFilms, 
             'diretores' => $listaDiretores, 
             'generos' => $listaGeneros,
         ]);
     }
 
     // Request é um objeto que contém a requisição feita pelo usuario
-    #[Route('/movie/new', name: 'filme_novo', methods: ['POST'])]
+    #[Route('/movie/new', name: 'film_new', methods: ['POST'])]
     public function newMovie(Request $request) 
     {
         $name = $request->request->get('movie');
@@ -49,7 +49,7 @@ class MovieController extends AbstractController
         return $this->redirect('/movie/list');
     }
     
-    #[Route('/movie/delete', name: 'filme_delete', methods: ['POST'])]
+    #[Route('/movie/delete', name: 'film_delete', methods: ['POST'])]
     public function deleteMovie(Request $request)
     {
         $movieId = ($request->request->get('id'));
