@@ -10,23 +10,23 @@ class DiretorService
 
     }
 
-    public function gerarDiretor(string $nome):void
+    public function gerarDiretor(string $name):void
     {
-        if($this->podeGerarDiretor($nome)){
+        if($this->podeGerarDiretor($name)){
             $diretor = new Diretor();
-            $diretor->setName($nome);
+            $diretor->setName($name);
             $this->diretorRepository->save($diretor, true);
         }
     }
 
-    public function podeGerarDiretor(string $nome): bool
+    public function podeGerarDiretor(string $name): bool
     {
-        if($nome == null){
+        if($name == null){
             return false;
         }
 
-        $diretorExistente = $this->diretorRepository->findBy(["nome" => $nome]);
-        if($diretorExistente != null || strlen($nome) <= 3){
+        $diretorExistente = $this->diretorRepository->findBy(["name" => $name]);
+        if($diretorExistente != null || strlen($name) <= 3){
             return false;
         }
 
