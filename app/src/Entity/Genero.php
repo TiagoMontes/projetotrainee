@@ -21,12 +21,12 @@ class Genero implements JsonSerializable
     #[ORM\Column(length: 255)]
     private ?string $titulo = null;
 
-    #[ORM\OneToMany(mappedBy: 'genero', targetEntity: Filme::class)] // temos uma relação de um para muitos, ou seja, um gênero pode ter vários filmes. targetEntity é a entidade que está sendo relacionada, no caso, a entidade Filme e mappedBy é o atributo que está sendo relacionado, no caso, o atributo genero da entidade Filme
-    private Collection $filme;
+    #[ORM\OneToMany(mappedBy: 'genero', targetEntity: Movie::class)] // temos uma relação de um para muitos, ou seja, um gênero pode ter vários filmes. targetEntity é a entidade que está sendo relacionada, no caso, a entidade Filme e mappedBy é o atributo que está sendo relacionado, no caso, o atributo genero da entidade Filme
+    private Collection $Movie;
 
     public function __construct()
     {
-        $this->filme = new ArrayCollection();
+        $this->movie = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -46,7 +46,7 @@ class Genero implements JsonSerializable
         return $this;
     }
 
-    public function addFilme(Filme $name): self
+    public function addMovie(Movie $name): self
     {
         if (!$this->name->contains($name)) {
             $this->name->add($name);
@@ -56,7 +56,7 @@ class Genero implements JsonSerializable
         return $this;
     }
 
-    public function removeFilme(Filme $name): self
+    public function removeMovie(Movie $name): self
     {
         if ($this->name->removeElement($name)) {
             // set the owning side to null (unless already changed)

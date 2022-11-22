@@ -1,16 +1,16 @@
 <?php
 
 namespace App\Service;
-use App\Repository\FilmeRepository;
+use App\Repository\MovieRepository;
 use App\Repository\DiretorRepository;
 use App\Repository\GeneroRepository;
-use App\Entity\Filme;
+use App\Entity\Movie;
 use App\Entity\Diretor;
 use App\Entity\Genero;
 
-class FilmeService
+class MovieService
 {
-    public function __construct(private FilmeRepository $filmeRepository, private DiretorRepository $diretorRepository, private GeneroRepository $generoRepository)
+    public function __construct(private MovieRepository $movieRepository, private DiretorRepository $diretorRepository, private GeneroRepository $generoRepository)
     {
 
     }
@@ -25,7 +25,7 @@ class FilmeService
             $filme->setName($name);
             $filme->setDiretor($diretor);
             $filme->setGenero($genero);
-            $this->filmeRepository->save($filme, true);
+            $this->movieRepository->save($filme, true);
         }
     }
 
@@ -35,7 +35,7 @@ class FilmeService
             return false;
         }
 
-        $filmeExiste = $this->filmeRepository->findBy(["name" => $name]);
+        $filmeExiste = $this->movieRepository->findBy(["name" => $name]);
         if($filmeExiste != null ){
             return false;
         }

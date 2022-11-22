@@ -3,13 +3,13 @@
 namespace App\Entity;
 
 use JsonSerializable;
-use App\Repository\FilmeRepository;
+use App\Repository\MovieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: FilmeRepository::class)]
-class Filme implements JsonSerializable
+#[ORM\Entity(repositoryClass: MovieRepository::class)]
+class Movie implements JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,7 +19,7 @@ class Filme implements JsonSerializable
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'filmes')] // a relação many
+    #[ORM\ManyToOne(inversedBy: 'films')] // a relação many
     #[ORM\JoinColumn(nullable: false)] 
     private ?Diretor $diretor = null;
 
@@ -27,7 +27,7 @@ class Filme implements JsonSerializable
     #[ORM\JoinColumn(nullable: false)] 
     private ?Genero $genero = null;
 
-    #[ORM\OneToMany(mappedBy: 'filme', targetEntity: Critica::class)] // 
+    #[ORM\OneToMany(mappedBy: 'movie', targetEntity: Critica::class)] // 
     private Collection $criticas;  // Collection é uma classe do Doctrine que representa uma coleção de objetos, no caso uma coleção de objetos do tipo Critica, que é a entidade que representa a tabela crítica no banco de dados.
 
     // as funções abaixo são getters e setters, que são responsáveis por pegar e definir os valores dos atributos da classe
@@ -100,8 +100,8 @@ class Filme implements JsonSerializable
     {
         if ($this->criticas->removeElement($critica)) {
             // set the owning side to null (unless already changed)
-            if ($critica->getFilme() === $this) {
-                $critica->setFilme(null);
+            if ($critica->getMovie() === $this) {
+                $critica->setMovie(null);
             }
         }
 
@@ -111,7 +111,7 @@ class Filme implements JsonSerializable
 
     public function jsonSerialize(): array
     {
-        return ["Filme"=>$this->getName(),"Id"=>$this->getId()];
+        return ["Movie"=>$this->getName(),"Id"=>$this->getId()];
     }
 
 }

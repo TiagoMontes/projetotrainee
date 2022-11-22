@@ -17,7 +17,7 @@ class Critica implements JsonSerializable
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'criticas')] 
-    private Filme $filme;
+    private Movie $movie;
 
     #[ORM\Column(length: 255)]
     private ?string $critica = null;
@@ -40,14 +40,14 @@ class Critica implements JsonSerializable
     }
     
 
-    public function getFilme(): Filme
+    public function getMovie(): Movie
     {
-        return $this->filme;
+        return $this->movie;
     }
 
-    public function setFilme(Filme $filme) 
+    public function setMovie(Movie $movie) 
     {
-        $this->filme = $filme;
+        $this->movie = $movie;
 
         return $this;
     }

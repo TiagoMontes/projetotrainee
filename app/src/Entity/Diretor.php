@@ -17,14 +17,14 @@ class Diretor implements JsonSerializable
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $nome = null;
+    private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'diretor', targetEntity: Filme::class, orphanRemoval: true)]
-    private Collection $filmes;
+    #[ORM\OneToMany(mappedBy: 'diretor', targetEntity: Movie::class, orphanRemoval: true)]
+    private Collection $films;
 
     public function __construct()
     {
-        $this->filmes = new ArrayCollection();
+        $this->films = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -34,12 +34,12 @@ class Diretor implements JsonSerializable
 
     public function getName(): ?string
     {
-        return $this->nome;
+        return $this->name;
     }
 
-    public function setName(string $nome): self
+    public function setName(string $name): self
     {
-        $this->nome = $nome;
+        $this->name = $name;
 
         return $this;
     }
@@ -47,27 +47,27 @@ class Diretor implements JsonSerializable
     /**
      * @return Collection<int, Filme>
      */
-    public function getFilmes(): Collection
+    public function getFilms(): Collection
     {
-        return $this->filmes;
+        return $this->films;
     }
 
-    public function addFilme(Filme $filme): self
+    public function addMovie(Movie $movie): self
     {
-        if (!$this->filmes->contains($filme)) {
-            $this->filmes->add($filme);
-            $filme->setDiretor($this);
+        if (!$this->films->contains($movie)) {
+            $this->films->add($movie);
+            $movie->setDiretor($this);
         }
 
         return $this;
     }
 
-    public function removeFilme(Filme $filme): self
+    public function removeFilme(Movie $name): self
     {
-        if ($this->filmes->removeElement($filme)) {
+        if ($this->name->removeElement($name)) {
             // set the owning side to null (unless already changed)
-            if ($filme->getDiretor() === $this) {
-                $filme->setDiretor(null);
+            if ($name->getDiretor() === $this) {
+                $name->setDiretor(null);
             }
         }
 
@@ -76,6 +76,6 @@ class Diretor implements JsonSerializable
 
     public function jsonSerialize(): array
     {
-        return ["Nome"=>$this->getName(),"Id"=>$this->getId()];
+        return ["Name"=>$this->getName(),"Id"=>$this->getId()];
     }
 }

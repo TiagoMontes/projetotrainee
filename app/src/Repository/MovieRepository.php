@@ -4,7 +4,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Filme;
+use App\Entity\Movie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,14 +16,14 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Filme[]    findAll()
  * @method Filme[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FilmeRepository extends ServiceEntityRepository
+class MovieRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Filme::class);
+        parent::__construct($registry, Movie::class);
     }
 
-    public function save(Filme $entity, bool $flush = false): void
+    public function save(Movie $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity); // getEntityManager é um metodo que irá pegar o entity manager, que é um objeto que irá gerenciar as entidades
         // persist significa que estamos persistindo a entidade, ou seja, estamos salvando ela no banco de dados
@@ -33,7 +33,7 @@ class FilmeRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Filme $entity, bool $flush = false): void
+    public function remove(Movie $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
