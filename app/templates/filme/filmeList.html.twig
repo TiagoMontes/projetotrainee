@@ -145,7 +145,7 @@
 
         <div class="header">
             <h1>Melhores filmes de 2022</h1>
-            <form action="/filme/novo" method="POST" class="form_header">
+            <form action="/movie/new" method="POST" class="form_header">
                 <input type="text" name="movie" class="campo_texto" placeholder="Digite o nome do filme">
                 <select name="diretorId" id="botao">
                     {% for diretor in diretores%}
@@ -176,7 +176,7 @@
                         <li class="filtravel">Diretor: <span>{{movie.diretor.name}}</span></li>
                         <li class="filtravel">Gênero: <span>{{movie.genero.titulo}}</span></li>
                     
-                        <form action="/filme/delete" method="POST">
+                        <form action="/movie/delete" method="POST">
                             <input type="hidden" name="id" value="{{ movie.id }}"/>
                             <input type="submit" id="botao" class="botao_remover" value="Remover"/>
                         </form>

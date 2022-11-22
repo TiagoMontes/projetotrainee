@@ -22,8 +22,8 @@ class MovieController extends AbstractController
         // o construtor é um metodo que é executado quando a classe é instanciada. 
     }
     
-    #[Route('/filme/lista', name: 'filme_list', methods: ['GET'])] // route é a rota que o usuario vai acessar para acessar o metodo. Ela mapeia uma url para podermos ver o resultado do metodo
-    public function filmes()
+    #[Route('/movie/list', name: 'filme_list', methods: ['GET'])] // route é a rota que o usuario vai acessar para acessar o metodo. Ela mapeia uma url para podermos ver o resultado do metodo
+    public function films()
     {
         $listaFilmes = $this->movieRepository->findAll(); // irá procurar toda a lista de filmes
         $listaDiretores = $this->diretorRepository->findAll(); // irá procurar toda a lista de diretores
@@ -37,8 +37,8 @@ class MovieController extends AbstractController
     }
 
     // Request é um objeto que contém a requisição feita pelo usuario
-    #[Route('/filme/novo', name: 'filme_novo', methods: ['POST'])]
-    public function novoFilme(Request $request) 
+    #[Route('/movie/new', name: 'filme_novo', methods: ['POST'])]
+    public function newMovie(Request $request) 
     {
         $name = $request->request->get('movie');
         $diretorId = $request->request->get('diretorId');
@@ -46,11 +46,11 @@ class MovieController extends AbstractController
         
         $this->movieService->gerarFilme($name, $diretorId, $generoId);
         
-        return $this->redirect('/filme/lista');
+        return $this->redirect('/movie/list');
     }
     
-    #[Route('/filme/delete', name: 'filme_delete', methods: ['POST'])]
-    public function deleteFilme(Request $request)
+    #[Route('/movie/delete', name: 'filme_delete', methods: ['POST'])]
+    public function deleteMovie(Request $request)
     {
         $movieId = ($request->request->get('id'));
         $movie = $this->movieRepository->find($movieId);
@@ -59,6 +59,6 @@ class MovieController extends AbstractController
             $this->movieRepository->remove($movie, true);
         }
         
-        return $this->redirect('/filme/lista');
+        return $this->redirect('/movie/list');
     }
 }
