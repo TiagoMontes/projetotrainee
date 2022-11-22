@@ -10,27 +10,27 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
-class DiretorController extends AbstractController
+class DirectorController extends AbstractController
 {
     public function __construct( private DirectorRepository $directorRepository, private DirectorService $directorService) {
     }
 
-    #[Route('/diretor/lista/{erro}', name: 'diretor_list', methods: ['GET'])]
+    #[Route('/director/list/{erro}', name: 'director_list', methods: ['GET'])]
     public function directors(string $erro = null)
     {
         $listDirectors = $this->directorRepository->findAll();
         
-        return $this->render('diretor/index.html.twig', [
+        return $this->render('director/index.html.twig', [
             'directors' => $listDirectors,
             'erro' => $erro
         ]);
 
     }
 
-    #[Route('/diretor/novo', name: 'diretor_novo', methods: ['POST'])]
+    #[Route('/director/new', name: 'director_new', methods: ['POST'])]
     public function novoDirector(Request $request)
     {
-        $directorName = $request->request->get('diretor');
+        $directorName = $request->request->get('director');
         $this->directorService->gerarDiretor($directorName);
 
         // ex de try catch
@@ -41,42 +41,43 @@ class DiretorController extends AbstractController
         // } catch (\Exception $e) {
         //     return $this->redirectToRoute('diretor_list', ["erro"=>$e->getMessage()]);
         // }
-        return $this->redirect('/diretor/lista');
+        return $this->redirect('/director/list');
     }
 
-    #[Route('/diretor/delete', name: 'diretor_delete', methods: ['POST'])] 
+    #[Route('/director/delete', name: 'director_delete', methods: ['POST'])] 
     public function deleteDirector(Request $request)
     {
-        $diretorId = ($request->request->get('id'));  // Como ele sabe especificamente qual o id do input? sendo que estamos trazendo o name, não o value
-        $diretor = $this->directorRepository->find($diretorId);
-        if($diretor){
+        $directorId = ($request->request->get('id'));  // Como ele sabe especificamente qual o id do input? sendo que estamos trazendo o name, não o value
+        $director = $this->directorRepository->find($directorId);
+        if($director){
             $this->directorRepository->remove($director, true);
         }
 
-        return $this->redirect('/diretor/lista');
+        return $this->redirect('/director/list');
     }
 
-    #[Route('/diretor/editar', name: 'diretor_editar', methods: ['POST'])] 
+    #[Route('/director/edit', name: 'director_edit', methods: ['POST'])] 
     public function editDirector(Request $request)
     {
-        $directorName = $request->request->get('diretor');
+        $directorName = $request->request->get('director');
         $directorId = $request->request->get('id'); 
 
-        try {
-            if($directorName === "Tiago"){
-                throw new \Exception("Tiago não pode ser diretor");     
-            }
-        } catch (\Exception $e) {
-            return $this->redirectToRoute('diretor_list', ["erro"=>$e->getMessage()]);
-        }
+        // try {
+        //     if($directorName === "Tiago"){
+        //         throw new \Exception("Tiago não pode ser diretor");     
+        //     }
+        // } catch (\Exception $e) {
+        //     return $this->redirectToRoute('director_list', ["erro"=>$e->getMessage()]);
+        // }
         
         $director = $this->directorRepository->find($directorId);
         $director->setName($directorName);
+
 
         if($directorName != null){
             $this->directorRepository->save($director, true);
         }
 
-        return $this->redirect('/diretor/lista');
+        return $this->redirect('/director/list');
     }
 }

@@ -7,7 +7,7 @@ use App\Entity\Movie;
 use App\Service\MovieService;
 use App\Repository\MovieRepository;
 use App\Repository\CriticaRepository;
-use App\Repository\DiretorRepository; // importa a classe diretor repository para poder usar os metodos dela
+use App\Repository\DirectorRepository; // importa a classe diretor repository para poder usar os metodos dela
 use App\Repository\GeneroRepository; // importa a classe genero repository para poder usar os metodos dela
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 // a classe abaixo é um controller, que é uma metodo que recebe uma requisição e retorna uma resposta
 class MovieController extends AbstractController  
 {
-    public function __construct( private MovieRepository $movieRepository, private DiretorRepository $diretorRepository, private GeneroRepository $generoRepository, private CriticaRepository $criticaRepository, private MovieService $movieService) { 
+    public function __construct( private MovieRepository $movieRepository, private DirectorRepository $directorRepository, private GeneroRepository $generoRepository, private CriticaRepository $criticaRepository, private MovieService $movieService) { 
         // o construtor é um metodo que é executado quando a classe é instanciada. 
     }
     
@@ -26,12 +26,12 @@ class MovieController extends AbstractController
     public function films()
     {
         $listFilms = $this->movieRepository->findAll(); // irá procurar toda a lista de filmes
-        $listaDiretores = $this->diretorRepository->findAll(); // irá procurar toda a lista de diretores
+        $listDirectors = $this->directorRepository->findAll(); // irá procurar toda a lista de diretores
         $listaGeneros = $this->generoRepository->findAll(); // irá procurar toda a lista de generos
 
         return $this->render('movie/index.html.twig', [
             'films' => $listFilms, 
-            'diretores' => $listaDiretores, 
+            'directors' => $listaDirectors, 
             'generos' => $listaGeneros,
         ]);
     }
@@ -41,10 +41,10 @@ class MovieController extends AbstractController
     public function newMovie(Request $request) 
     {
         $name = $request->request->get('movie');
-        $diretorId = $request->request->get('diretorId');
+        $directorId = $request->request->get('directorId');
         $generoId = $request->request->get('generoId');
         
-        $this->movieService->gerarFilme($name, $diretorId, $generoId);
+        $this->movieService->gerarFilme($name, $directorId, $generoId);
         
         return $this->redirect('/movie/list');
     }

@@ -1,21 +1,21 @@
 <?php
 
 namespace App\Service;
-use App\Repository\DiretorRepository;
-use App\Entity\Diretor;
+use App\Repository\DirectorRepository;
+use App\Entity\Director;
 
-class DiretorService
+class DirectorService
 {
-    public function __construct(private DiretorRepository $diretorRepository){
+    public function __construct(private DirectorRepository $directorRepository){
 
     }
 
     public function gerarDiretor(string $name):void
     {
         if($this->podeGerarDiretor($name)){
-            $diretor = new Diretor();
-            $diretor->setName($name);
-            $this->diretorRepository->save($diretor, true);
+            $director = new Director();
+            $director->setName($name);
+            $this->directorRepository->save($director, true);
         }
     }
 
@@ -25,8 +25,8 @@ class DiretorService
             return false;
         }
 
-        $diretorExistente = $this->diretorRepository->findBy(["name" => $name]);
-        if($diretorExistente != null || strlen($name) <= 3){
+        $existingDirector = $this->directorRepository->findBy(["name" => $name]);
+        if($existingDirector != null || strlen($name) <= 3){
             return false;
         }
 

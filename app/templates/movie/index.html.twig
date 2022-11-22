@@ -147,9 +147,9 @@
             <h1>Melhores filmes de 2022</h1>
             <form action="/movie/new" method="POST" class="form_header">
                 <input type="text" name="movie" class="campo_texto" placeholder="Digite o nome do filme">
-                <select name="diretorId" id="botao">
-                    {% for diretor in diretores%}
-                        <option value={{diretor.id}}>{{diretor.name}}</option>
+                <select name="directorId" id="botao">
+                    {% for director in directors%}
+                        <option value={{director.id}}>{{director.name}}</option>
                     {% endfor %}
                 </select>
                 <select name="generoId" id="botao">
@@ -173,7 +173,7 @@
                     
                     <div class="itens_filme">
                         <li class="filtravel">Filme: <span>{{movie.name}}</span></li>
-                        <li class="filtravel">Diretor: <span>{{movie.diretor.name}}</span></li>
+                        <li class="filtravel">Diretor: <span>{{movie.director.name}}</span></li>
                         <li class="filtravel">Gênero: <span>{{movie.genero.titulo}}</span></li>
                     
                         <form action="/movie/delete" method="POST">

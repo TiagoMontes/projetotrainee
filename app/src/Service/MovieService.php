@@ -2,7 +2,7 @@
 
 namespace App\Service;
 use App\Repository\MovieRepository;
-use App\Repository\DiretorRepository;
+use App\Repository\DirectorRepository;
 use App\Repository\GeneroRepository;
 use App\Entity\Movie;
 use App\Entity\Diretor;
@@ -10,7 +10,7 @@ use App\Entity\Genero;
 
 class MovieService
 {
-    public function __construct(private MovieRepository $movieRepository, private DiretorRepository $diretorRepository, private GeneroRepository $generoRepository)
+    public function __construct(private MovieRepository $movieRepository, private DirectorRepository $directorRepository, private GeneroRepository $generoRepository)
     {
 
     }

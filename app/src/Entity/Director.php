@@ -3,13 +3,13 @@
 namespace App\Entity;
 
 use JsonSerializable;
-use App\Repository\DiretorRepository;
+use App\Repository\DirectorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: DiretorRepository::class)] //DiretorRepository é a classe que gerencia a entidade Diretor no banco de dados, ela é uma boa pratica para separar as responsabilidades de cada classe e facilitar a manutenção do código.
-class Diretor implements JsonSerializable 
+#[ORM\Entity(repositoryClass: DirectorRepository::class)] //DiretorRepository é a classe que gerencia a entidade Diretor no banco de dados, ela é uma boa pratica para separar as responsabilidades de cada classe e facilitar a manutenção do código.
+class Director implements JsonSerializable 
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,7 +19,7 @@ class Diretor implements JsonSerializable
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'diretor', targetEntity: Movie::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'director', targetEntity: Movie::class, orphanRemoval: true)]
     private Collection $films;
 
     public function __construct()
@@ -56,7 +56,7 @@ class Diretor implements JsonSerializable
     {
         if (!$this->films->contains($movie)) {
             $this->films->add($movie);
-            $movie->setDiretor($this);
+            $movie->setDirector($this);
         }
 
         return $this;
@@ -66,8 +66,8 @@ class Diretor implements JsonSerializable
     {
         if ($this->name->removeElement($name)) {
             // set the owning side to null (unless already changed)
-            if ($name->getDiretor() === $this) {
-                $name->setDiretor(null);
+            if ($name->getDirector() === $this) {
+                $name->setDirector(null);
             }
         }
 

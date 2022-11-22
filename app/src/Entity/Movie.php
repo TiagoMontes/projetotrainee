@@ -21,7 +21,7 @@ class Movie implements JsonSerializable
 
     #[ORM\ManyToOne(inversedBy: 'films')] // a relação many
     #[ORM\JoinColumn(nullable: false)] 
-    private ?Diretor $diretor = null;
+    private ?Director $director = null;
 
     #[ORM\ManyToOne(inversedBy: 'Genero')] 
     #[ORM\JoinColumn(nullable: false)] 
@@ -54,14 +54,14 @@ class Movie implements JsonSerializable
         return $this;
     }
 
-    public function getDiretor(): ?Diretor
+    public function getDirector(): ?Director
     {
-        return $this->diretor;
+        return $this->director;
     }
 
-    public function setDiretor(?Diretor $diretor): self 
+    public function setDirector(?Director $director): self 
     {
-        $this->diretor = $diretor;
+        $this->director = $director;
 
         return $this;
     }

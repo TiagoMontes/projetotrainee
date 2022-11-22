@@ -113,8 +113,8 @@
 <body>
     <div class="header">
         <h1>Os melhores diretores da última década</h1>
-        <form action="/diretor/novo" method="POST">
-            <input type="text" name="diretor" class="campo_diretor"/>
+        <form action="/director/new" method="POST">
+            <input type="text" name="director" class="campo_diretor"/>
             <input type="submit" class="botao" value="Adicionar" />
         </form>
         <label>Filtrar: <input type="search" id="pesquisa" oninput="filtrar()" class="campo_diretor"></label>
@@ -127,14 +127,14 @@
         {% for director in directors %} {# "para cada diretor em diretores" #}
             <div class="list">
                 <li> {{director.name}} </li>
-                <form action="/diretor/delete" method="POST"> 
+                <form action="/director/delete" method="POST"> 
                     <input type="hidden" name="id" value="{{ director.id }}"/> {#Estamos identificado o ID do input que vamos excluir#}
                     <input type="submit" class="botao" value="Remover"/>
                 </form>
                 <div class="form_edicao" id="form_edicao_{{director.id}}" hidden>
-                    <form action="/diretor/editar" method="POST">
+                    <form action="/director/edit" method="POST">
                         <input type="hidden" name="id" value="{{ director.id }}"/> 
-                        <input type="text" name="diretor" class="campo_diretor"/>
+                        <input type="text" name="director" class="campo_diretor"/>
                         <input type="submit" class="botao" value="editar"/>
                     </form>
                 </div>
@@ -148,7 +148,7 @@
     const list = document.querySelector("#lista");
     const itens = lista.querySelectorAll("li");
 
-    const test = (diretor_id) => {
+    const test = (director_id) => {
         let form = document.querySelector("#form_edicao_"+director_id);
         form.hidden = !form.hidden
     }
