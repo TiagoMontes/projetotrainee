@@ -146,7 +146,7 @@
         <div class="header">
             <h1>Melhores filmes de 2022</h1>
             <form action="/filme/novo" method="POST" class="form_header">
-                <input type="text" name="filme" class="campo_texto" placeholder="Digite o nome do filme">
+                <input type="text" name="movie" class="campo_texto" placeholder="Digite o nome do filme">
                 <select name="diretorId" id="botao">
                     {% for diretor in diretores%}
                         <option value={{diretor.id}}>{{diretor.name}}</option>
@@ -168,31 +168,31 @@
         <div class="main">
             <h2>Lista de filmes</h2>
             <ul id="lista_filmes">    
-                {% for filme in filmes %}  {# esta linha significa - para cada filme dentro de filmes, executaremos o codigo abaixo#}
+                {% for movie in films %}  {# esta linha significa - para cada filme dentro de filmes, executaremos o codigo abaixo#}
                     
                     
                     <div class="itens_filme">
-                        <li class="filtravel">Filme: <span>{{filme.name}}</span></li>
-                        <li class="filtravel">Diretor: <span>{{filme.diretor.name}}</span></li>
-                        <li class="filtravel">Gênero: <span>{{filme.genero.titulo}}</span></li>
+                        <li class="filtravel">Filme: <span>{{movie.name}}</span></li>
+                        <li class="filtravel">Diretor: <span>{{movie.diretor.name}}</span></li>
+                        <li class="filtravel">Gênero: <span>{{movie.genero.titulo}}</span></li>
                     
                         <form action="/filme/delete" method="POST">
-                            <input type="hidden" name="id" value="{{ filme.id }}"/>
+                            <input type="hidden" name="id" value="{{ movie.id }}"/>
                             <input type="submit" id="botao" class="botao_remover" value="Remover"/>
                         </form>
 
 
                         <div class="criticas">
                         
-                            <h3>Escreva uma crítica ao filme {{filme.name}}</h3>
+                            <h3>Escreva uma crítica ao filme {{movie.name}}</h3>
 
                             <form action="/critica/novo" class="itens_critica" method="POST">
-                                <input type="hidden" name="filme_id" value="{{ filme.id }}"/>
+                                <input type="hidden" name="filme_id" value="{{ movie.id }}"/>
                                 <textarea name="critica" rows="4" cols="50" placeholder="Deixe sua nota de 0 a 5 e uma critica ao filme"></textarea>
                                 <input type="submit" value="Enviar" id="botao"/>
                             </form>
 
-                            {% for critica in filme.criticas %}
+                            {% for critica in movie.criticas %}
                                 <li>{{critica.critica}}</li>
                             {% endfor %}
 

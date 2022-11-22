@@ -3,9 +3,9 @@
 
 namespace App\Controller; // namespace é o caminho do arquivo
 
-use App\Entity\Filme;
-use App\Service\FilmeService;
-use App\Repository\FilmeRepository;
+use App\Entity\Movie;
+use App\Service\MovieService;
+use App\Repository\MovieRepository;
 use App\Repository\CriticaRepository;
 use App\Repository\DiretorRepository; // importa a classe diretor repository para poder usar os metodos dela
 use App\Repository\GeneroRepository; // importa a classe genero repository para poder usar os metodos dela
@@ -30,7 +30,7 @@ class MovieController extends AbstractController
         $listaGeneros = $this->generoRepository->findAll(); // irá procurar toda a lista de generos
 
         return $this->render('filme/filmeList.html.twig', [
-            'filmes' => $listaFilmes, 
+            'films' => $listaFilmes, 
             'diretores' => $listaDiretores, 
             'generos' => $listaGeneros,
         ]);
@@ -40,11 +40,11 @@ class MovieController extends AbstractController
     #[Route('/filme/novo', name: 'filme_novo', methods: ['POST'])]
     public function novoFilme(Request $request) 
     {
-        $filmeName = $request->request->get('filme');
+        $name = $request->request->get('movie');
         $diretorId = $request->request->get('diretorId');
         $generoId = $request->request->get('generoId');
         
-        $this->movieService->gerarFilme($filmeName, $diretorId, $generoId);
+        $this->movieService->gerarFilme($name, $diretorId, $generoId);
         
         return $this->redirect('/filme/lista');
     }
@@ -52,11 +52,11 @@ class MovieController extends AbstractController
     #[Route('/filme/delete', name: 'filme_delete', methods: ['POST'])]
     public function deleteFilme(Request $request)
     {
-        $filmeId = ($request->request->get('id'));
-        $filme = $this->movieRepository->find($filmeId);
+        $movieId = ($request->request->get('id'));
+        $movie = $this->movieRepository->find($movieId);
         
-        if($filme){
-            $this->movieRepository->remove($filme, true);
+        if($movie){
+            $this->movieRepository->remove($movie, true);
         }
         
         return $this->redirect('/filme/lista');

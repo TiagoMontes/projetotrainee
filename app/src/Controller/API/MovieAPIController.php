@@ -2,7 +2,7 @@
 
 namespace App\Controller\API;
 
-use App\Repository\FilmeRepository;
+use App\Repository\MovieRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FilmeAPIController extends AbstractController
 {
-    public function __construct( private FilmeRepository $filmeRepository)
+    public function __construct( private MovieRepository $movieRepository)
     {
 
     }
@@ -18,17 +18,17 @@ class FilmeAPIController extends AbstractController
     #[Route('/filme/api/find/{id}', methods: ['GET'])]
     public function find($id)
     {
-        $filme = $this->filmeRepository->find($id);
+        $movie = $this->movieRepository->find($id);
 
-        return new JsonResponse($filme);
+        return new JsonResponse($movie);
     }
 
     #[Route('/filme/api/findall', methods: ['GET'])]
     public function findAll()
     {
-        $filmes = $this->filmeRepository->findAll();
+        $films = $this->movieRepository->findAll();
 
-        return new JsonResponse($filmes);
+        return new JsonResponse($films);
     }
 
 }

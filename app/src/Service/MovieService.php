@@ -21,11 +21,11 @@ class MovieService
             $diretor = $this->diretorRepository->find($diretorId);
             $genero = $this->generoRepository->find($generoId);
 
-            $filme = new Filme();
-            $filme->setName($name);
-            $filme->setDiretor($diretor);
-            $filme->setGenero($genero);
-            $this->movieRepository->save($filme, true);
+            $movie = new Movie();
+            $movie->setName($name);
+            $movie->setDiretor($diretor);
+            $movie->setGenero($genero);
+            $this->movieRepository->save($movie, true);
         }
     }
 

@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Critica;
 use App\Repository\CriticaRepository;
-use App\Repository\FilmeRepository;
+use App\Repository\MovieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CriticaController extends AbstractController
 {
-    public function __construct ( private CriticaRepository $criticaRepository, private FilmeRepository $filmeRepository){
+    public function __construct ( private CriticaRepository $criticaRepository, private MovieRepository $movieRepository){
 
     }
 
@@ -31,13 +31,13 @@ class CriticaController extends AbstractController
     {
         $criticaTexto = $request->request->get('critica');
         $filmeId = $request->request->get('filme_id');
-        $filme = $this->filmeRepository->find($filmeId);
+        $filme = $this->movieRepository->find($filmeId);
 
         if($criticaTexto != null && $filme != null){
             $critica = new Critica();
             $critica->setCritica($criticaTexto);
-            $critica->setFilme($filme);
-            $this->criticaRepository->save($critica, true);
+            $critica->setMovie($movie);
+            $this->movieRepository->save($critica, true);
         }
 
         return $this->redirect('/filme/lista');
