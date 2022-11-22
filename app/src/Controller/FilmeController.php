@@ -42,7 +42,7 @@ class FilmeController extends AbstractController
     {
 
         $filmeName = $request->request->get('filme');
-        $diretorId = $request->request->get('diretorId');
+        $diretorId = $request->request->get('diretorid');
         $generoId = $request->request->get('generoId');
         
         $this->filmeService->gerarFilme($filmeName, $diretorId, $generoId);
