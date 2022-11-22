@@ -46,22 +46,22 @@ class Genero implements JsonSerializable
         return $this;
     }
 
-    public function addFilme(Filme $filme): self
+    public function addFilme(Filme $name): self
     {
-        if (!$this->filme->contains($filme)) {
-            $this->filme->add($filme);
-            $filme->setGenero($this);
+        if (!$this->name->contains($name)) {
+            $this->name->add($name);
+            $name->setGenero($this);
         }
 
         return $this;
     }
 
-    public function removeFilme(Filme $filme): self
+    public function removeFilme(Filme $name): self
     {
-        if ($this->filme->removeElement($filme)) {
+        if ($this->name->removeElement($name)) {
             // set the owning side to null (unless already changed)
-            if ($filme->getGenero() === $this) {
-                $filme->setGenero(null);
+            if ($name->getGenero() === $this) {
+                $name->setGenero(null);
             }
         }
 

@@ -147,7 +147,7 @@
             <h1>Melhores filmes de 2022</h1>
             <form action="/filme/novo" method="POST" class="form_header">
                 <input type="text" name="filme" class="campo_texto" placeholder="Digite o nome do filme">
-                <select name="diretor" id="botao">
+                <select name="diretorId" id="botao">
                     {% for diretor in diretores%}
                         <option value={{diretor.id}}>{{diretor.name}}</option>
                     {% endfor %}

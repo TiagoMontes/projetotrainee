@@ -15,27 +15,27 @@ class FilmeService
 
     }
 
-    public function gerarFilme(string $titulo, string $diretorId, string $generoId): void
+    public function gerarFilme(string $name, string $diretorId, string $generoId): void
     {
-        if($this->podeGerarFilme($titulo, $diretorId, $generoId)){
+        if($this->podeGerarFilme($name, $diretorId, $generoId)){
             $diretor = $this->diretorRepository->find($diretorId);
             $genero = $this->generoRepository->find($generoId);
 
             $filme = new Filme();
-            $filme->setName($titulo);
+            $filme->setName($name);
             $filme->setDiretor($diretor);
             $filme->setGenero($genero);
             $this->filmeRepository->save($filme, true);
         }
     }
 
-    public function podeGerarFilme(string $filme, string $diretorId, string $generoId)
+    public function podeGerarFilme(string $name, string $diretorId, string $generoId)
     {
-        if($filme == null || $diretorId == null || $generoId == null){
+        if($name == null || $diretorId == null || $generoId == null){
             return false;
         }
 
-        $filmeExiste = $this->filmeRepository->findBy(["name" => $filme]);
+        $filmeExiste = $this->filmeRepository->findBy(["name" => $name]);
         if($filmeExiste != null ){
             return false;
         }
