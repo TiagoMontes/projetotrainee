@@ -186,14 +186,14 @@
                         
                             <h3>Escreva uma crítica ao filme {{movie.name}}</h3>
 
-                            <form action="/critica/novo" class="itens_critica" method="POST">
-                                <input type="hidden" name="filme_id" value="{{ movie.id }}"/>
-                                <textarea name="critica" rows="4" cols="50" placeholder="Deixe sua nota de 0 a 5 e uma critica ao filme"></textarea>
+                            <form action="/review/new" class="itens_critica" method="POST">
+                                <input type="hidden" name="movie_id" value="{{ movie.id }}"/>
+                                <textarea name="review" rows="4" cols="50" placeholder="Deixe sua nota de 0 a 5 e uma critica ao filme"></textarea>
                                 <input type="submit" value="Enviar" id="botao"/>
                             </form>
 
-                            {% for critica in movie.criticas %}
-                                <li>{{critica.critica}}</li>
+                            {% for review in movie.review %}
+                                <li>{{review.review}}</li>
                             {% endfor %}
 
                         </div>

@@ -3,38 +3,38 @@
 namespace App\Entity;
 
 use JsonSerializable;
-use App\Repository\CriticaRepository;
+use App\Repository\ReviewRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CriticaRepository::class)]
-class Critica implements JsonSerializable
+#[ORM\Entity(repositoryClass: ReviewRepository::class)]
+class Review implements JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'criticas')] 
+    #[ORM\ManyToOne(inversedBy: 'reviews')] 
     private Movie $movie;
 
     #[ORM\Column(length: 255)]
-    private ?string $critica = null;
+    private ?string $review = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCritica(): ?string
+    public function getReview(): ?string
     {
-        return $this->critica;
+        return $this->review;
     }
 
-    public function setCritica(string $critica): self
+    public function setReview(string $review): self
     {
-        $this->critica = $critica;
+        $this->review = $review;
 
         return $this;
     }
@@ -54,7 +54,7 @@ class Critica implements JsonSerializable
 
     public function jsonSerialize(): array
     {
-        return ["Critica"=> $this->getCritica(),"Id"=> $this->getId()];
+        return ["review"=> $this->getReview(),"Id"=> $this->getId()];
     }
 
 }

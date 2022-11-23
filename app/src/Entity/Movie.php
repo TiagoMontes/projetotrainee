@@ -19,22 +19,22 @@ class Movie implements JsonSerializable
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'films')] // a relação many
+    #[ORM\ManyToOne(inversedBy: 'movies')] // a relação many
     #[ORM\JoinColumn(nullable: false)] 
     private ?Director $director = null;
 
-    #[ORM\ManyToOne(inversedBy: 'movie')] 
+    #[ORM\ManyToOne(inversedBy: 'movies')] 
     #[ORM\JoinColumn(nullable: false)] 
     private ?Genre $genre = null;
 
-    #[ORM\OneToMany(mappedBy: 'movie', targetEntity: Critica::class)] // 
-    private Collection $criticas;  // Collection é uma classe do Doctrine que representa uma coleção de objetos, no caso uma coleção de objetos do tipo Critica, que é a entidade que representa a tabela crítica no banco de dados.
+    #[ORM\OneToMany(mappedBy: 'movie', targetEntity: Review::class)] // 
+    private Collection $review;  // Collection é uma classe do Doctrine que representa uma coleção de objetos, no caso uma coleção de objetos do tipo Critica, que é a entidade que representa a tabela crítica no banco de dados.
 
     // as funções abaixo são getters e setters, que são responsáveis por pegar e definir os valores dos atributos da classe
 
     public function __construct()
     {
-        $this->criticas = new ArrayCollection();
+        $this->review = new ArrayCollection();
     }
 
     public function getId(): ?int // retorna o id
@@ -81,27 +81,27 @@ class Movie implements JsonSerializable
     /**
      * @return Collection<int, Filme> 
      */
-    public function getCriticas(): Collection
+    public function getReview(): Collection
     {
-        return $this->criticas;
+        return $this->review;
     }
 
-    public function addCritica(Critica $critica): self
+    public function addReview(Review $review): self
     {
-        if (!$this->criticas->contains($critica)) {
-            $this->criticas->add($critica);
-            $critica->setFilme($this);
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setMovie($this);
         }
 
         return $this;
     }
 
-    public function removeCritica(Critica $critica): self
+    public function removeReview(Review $review): self
     {
-        if ($this->criticas->removeElement($critica)) {
+        if ($this->reviews->removeElement($review)) {
             // set the owning side to null (unless already changed)
-            if ($critica->getMovie() === $this) {
-                $critica->setMovie(null);
+            if ($review->getMovie() === $this) {
+                $review->setMovie(null);
             }
         }
 
@@ -111,7 +111,7 @@ class Movie implements JsonSerializable
 
     public function jsonSerialize(): array
     {
-        return ["Movie"=>$this->getName(),"Id"=>$this->getId()];
+        return ["movie"=>$this->getName(),"Id"=>$this->getId()];
     }
 
 }
