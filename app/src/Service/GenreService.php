@@ -25,8 +25,8 @@ class GenreService
             return false;
         }
 
-        $generoExistente = $this->genreRepository->findBy(["name" => $name]);
-        if($generoExistente != null || strlen($name) <= 3){
+        $genreExist = $this->genreRepository->findBy(["name" => $name]);
+        if($genreExist != null || strlen($name) <= 3){
             return false;
         }
         return true;

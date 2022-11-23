@@ -30,16 +30,16 @@ class CriticaController extends AbstractController
     public function novaCritica(Request $request)
     {
         $criticaTexto = $request->request->get('critica');
-        $filmeId = $request->request->get('filme_id');
-        $filme = $this->movieRepository->find($filmeId);
+        $movieId = $request->request->get('filme_id');
+        $movie = $this->movieRepository->find($movieId);
 
-        if($criticaTexto != null && $filme != null){
+        if($criticaTexto != null && $movie != null){
             $critica = new Critica();
             $critica->setCritica($criticaTexto);
             $critica->setMovie($movie);
-            $this->movieRepository->save($critica, true);
+            $this->criticaRepository->save($critica, true);
         }
 
-        return $this->redirect('/filme/lista');
+        return $this->redirect('/movie/list');
     }
 }

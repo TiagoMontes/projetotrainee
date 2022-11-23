@@ -28,7 +28,7 @@ class GenreController extends AbstractController
     #[Route('/genre/new', name: 'genre_new', methods: ['POST'])]
     public function newGenre(Request $request)
     {
-        $genreName = $request->request->get('genero');
+        $genreName = $request->request->get('genre');
         $this->genreService->generateGenre($genreName);
 
         return $this->redirect('/genre/list');
@@ -52,11 +52,11 @@ class GenreController extends AbstractController
     public function editGenre(Request $request)
     {
 
-        $genreName = $request->request->get('genero'); //Estamos fazendo uma requisição para PEGAR 'genero' do front-end
-        $genreId = $request->request->get('id'); // Estamos requisitando o Id
+        $genreName = $request->request->get('genre');
+        $genreId = $request->request->get('id');
 
-        $genre = $this->genreRepository->find($genreId); // vamos procurar o id no nosso banco de dados
-        $genre->setName($genreName);// Após identificarmos o ID, definiremos o setTitulo sendo o nome puxando em $generoName pelo input
+        $genre = $this->genreRepository->find($genreId);
+        $genre->setName($genreName);
 
         if($genreName != null){
             $this->genreRepository->save($genre, true);
