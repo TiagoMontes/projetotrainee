@@ -24,23 +24,47 @@ body{
     cursor: pointer;
 }
 
-.button--enviar{
-    background-color: #fff;
+.button--send {
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #fff;
+
+    border-radius: 6px;
+    width: 100px;
+    height: 30px;
+    background-size: 200% auto;
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+    background-image: linear-gradient(to right, #00bd4f 0%, #77ffaf 50%, #00bd4f 100%);
+    transition: 0.5s;
 }
 
-.button--enviar:hover{
-    background-color: rgb(54, 207, 54);
-    color: rgb(255, 255, 255);
-    border: 1px solid rgb(54, 207, 54);
+.button--send:hover {
+    background-position: right center;
 }
 
-.button--remove{
-    background-color: rgb(255, 255, 255);
+.button--remove {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #fff;
+
+    border-radius: 6px;
+    width: 100px;
+        height: 30px;
+    background-size: 200% auto;
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+    background-image: linear-gradient(to right, #ed2b2b 0%, #f68686 50%, #ed2b2b 100%);
+    transition: 0.5s;
 }
 
-.button--remove:hover{
-    background-color: rgb(188, 43, 43);
-    color: rgb(255, 255, 255);
+.button--remove:hover {
+    background-position: right center;
 }
 
 .button--transparent{

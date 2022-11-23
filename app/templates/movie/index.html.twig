@@ -57,7 +57,7 @@
                             <form action="/review/new" class="item_review" method="POST">
                                 <input type="hidden" name="movie_id" value="{{ movie.id }}"/>
                                 <textarea name="review" rows="4" cols="50" placeholder="Deixe sua nota de 0 a 5 e uma critica ao filme"></textarea>
-                                <input type="submit" value="Enviar" id="button" class="button button--enviar"/>
+                                <input type="submit" value="Enviar" id="button" class="button button--send"/>
                             </form>
 
                             {% for review in movie.reviews %}

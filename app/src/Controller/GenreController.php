@@ -52,7 +52,7 @@ class GenreController extends AbstractController
     public function editGenre(Request $request)
     {
 
-        $genreName = $request->request->get('genre');
+        $genreName = $request->request->get("genre_edit");
         $genreId = $request->request->get('id');
 
         $genre = $this->genreRepository->find($genreId);
