@@ -42,6 +42,4 @@ class MovieService
 
         return true;
     }
-
-
 }

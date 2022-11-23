@@ -21,7 +21,7 @@ class Genre implements JsonSerializable
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'genre', targetEntity: Movie::class)] // temos uma relação de um para muitos, ou seja, um gênero pode ter vários filmes. targetEntity é a entidade que está sendo relacionada, no caso, a entidade Filme e mappedBy é o atributo que está sendo relacionado, no caso, o atributo genero da entidade Filme
+    #[ORM\OneToMany(mappedBy: 'genre', targetEntity: Movie::class)]
     private Collection $movies;
 
     public function __construct()
