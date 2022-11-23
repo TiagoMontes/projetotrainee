@@ -1,195 +1,61 @@
 <html>
-<head>
-    <title>Concorrente IMDB</title>
-    <style>
-        *{
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
+    <head>
+        <title>Concorrente IMDB</title>
+        {% block stylesheets %}
+            <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet"/>
+        {% endblock %}
 
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items:center;
-        }
-
-        span {
-            font-weight: bold;
-        }
-
-        #botao{
-            padding: 8px;
-            border-radius: 5px;
-            font-weight: bold;
-
-            cursor: pointer;
-        }
-
-        .botao_remover{
-            background-color: white;
-
-            transition: 1s ease-out;
-        }
-
-        .botao_remover:hover{
-            background-color: red;
-            color: white;
-        }
-
-        .header{
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 500px;
-
-            margin: 30px 0 50px 0;
-        }
-
-        .header h1 {
-            font-size: 40px;
-            margin-bottom: 15px
-        }
-
-        .header form{
-            margin-bottom: 15px;
-            width: 500px;
-        }
-
-        .form_header{
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            width: 500px;
-        }
-
-        .campo_texto{
-            width: 200px;
-            border: none;
-            border-bottom: 1px solid black;
-        }
-
-        .main h2{
-            font-size: 34px;
-            margin-bottom: 10px;
-        }
-
-        .main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-        }
-
-        .main li{
-            list-style: none;
-        }
-        
-        .filtravel{
-            border: 2px solid black;
-            padding: 10px 20px;
-            margin-bottom: 20px;
-            width: 500px;
-
-            border-radius: 10px;
-        }
-
-        .itens_filme{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            border: 2px solid black;
-            border-radius: 20px;
-            margin: 10px 0 10px 0;
-            padding: 30px;
-        }
-
-        .lista_filmes{
-            border: 2px solid black;
-        }
-
-        .criticas{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: 20px;
-
-            border: 2px solid black;
-        }
-
-        .criticas h3{
-            margin: 20px 0 20px 0;
-        }
-
-        .criticas li{
-            margin-bottom: 8px;
-        }
-
-        .itens_critica{
-            display: flex;
-            flex-direction: column;
-
-            margin-bottom: 15px;
-        }
-
-    </style>
-</head>
+    </head>
     <body>
 
 
         <div class="header">
             <h1>Melhores filmes de 2022</h1>
             <form action="/movie/new" method="POST" class="form_header">
-                <input type="text" name="movie" class="campo_texto" placeholder="Digite o nome do filme">
-                <select name="directorId" id="botao">
+                <input type="text" name="movie" class="text_field" placeholder="Digite o nome do filme">
+                <select name="directorId" id="butttom" class="button">
                     {% for director in directors%}
                         <option value={{director.id}}>{{director.name}}</option>
                     {% endfor %}
                 </select>
-                <select name="genreId" id="botao">
+                <select name="genreId" id="button" class="button">
                     {% for genre in genres %}
                         <option value={{genre.id}}>{{genre.name}}</option>
                     {% endfor %}
                 </select>
-                <input type="submit" id="botao" value="Adicionar">
+                <input type="submit" id="button" class="button" value="Adicionar">
             </form>
             <label> 
-                Filtrar: <input type="search" id="pesquisa" class="campo_texto" oninput="filtrar()"/>
+                Filtrar: <input type="search" id="search_field" class="text_field" oninput="filtrar()"/>
             </label>
         </div>
 
 
         <div class="main">
             <h2>Lista de filmes</h2>
-            <ul id="lista_filmes">    
+            <ul id="movies_list">    
                 {% for movie in films %}  {# esta linha significa - para cada filme dentro de filmes, executaremos o codigo abaixo#}
                     
                     
-                    <div class="itens_filme">
+                    <div class="item_movie">
                         <li class="filtravel">Filme: <span>{{movie.name}}</span></li>
                         <li class="filtravel">Diretor: <span>{{movie.director.name}}</span></li>
                         <li class="filtravel">Gênero: <span>{{movie.genre.name}}</span></li>
                     
                         <form action="/movie/delete" method="POST">
                             <input type="hidden" name="id" value="{{ movie.id }}"/>
-                            <input type="submit" id="botao" class="botao_remover" value="Remover"/>
+                            <input type="submit" id="button" class="button" value="Remover"/>
                         </form>
 
 
-                        <div class="criticas">
+                        <div class="reviews">
                         
                             <h3>Escreva uma crítica ao filme {{movie.name}}</h3>
 
-                            <form action="/review/new" class="itens_critica" method="POST">
+                            <form action="/review/new" class="item_review" method="POST">
                                 <input type="hidden" name="movie_id" value="{{ movie.id }}"/>
                                 <textarea name="review" rows="4" cols="50" placeholder="Deixe sua nota de 0 a 5 e uma critica ao filme"></textarea>
-                                <input type="submit" value="Enviar" id="botao"/>
+                                <input type="submit" value="Enviar" id="button" class"button"/>
                             </form>
 
                             {% for review in movie.review %}
@@ -215,20 +81,20 @@
 <script>
 
     //Vamos mapear todas as listas para que o filtro consiga procurar em todos os padrões, seja filme, diretor ou genero
-    const lista = document.querySelector("#lista_filmes");
+    const lista = document.querySelector(".movies_list");
     const filtraveis = lista.querySelectorAll(".filtravel");
 
     const filtrar = () => {
-        const itens_filme = document.querySelectorAll(".itens_filme");
-        itens_filme.forEach((item) => {
+        const items_movie = document.querySelectorAll(".item_movie");
+        items_movie.forEach((item) => {
             item.style.display = "none";
         })
 
-        let pesquisa = document.querySelector("#pesquisa").value.toLowerCase();
+        let search = document.querySelector("#search_field").value.toLowerCase();
 
         filtraveis.forEach((filtravel) => {
-            let nome = filtravel.innerText.toLowerCase();
-            if (nome.includes(pesquisa)) {
+            let name = filtravel.innerText.toLowerCase();
+            if (name.includes(search)) {
                 filtravel.parentNode.style.display = "flex";
             }
         });
