@@ -20,25 +20,24 @@ class Review implements JsonSerializable
     private Movie $movie;
 
     #[ORM\Column(length: 255)]
-    private ?string $review = null;
+    private ?string $comment = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getReview(): ?string
+    public function getComment(): ?string
     {
-        return $this->review;
+        return $this->comment;
     }
 
-    public function setReview(string $review): self
+    public function setComment(string $comment): self
     {
-        $this->review = $review;
+        $this->comment = $comment;
 
         return $this;
     }
-    
 
     public function getMovie(): Movie
     {
@@ -54,7 +53,7 @@ class Review implements JsonSerializable
 
     public function jsonSerialize(): array
     {
-        return ["review"=> $this->getReview(),"Id"=> $this->getId()];
+        return ["comment"=> $this->getReview(),"Id"=> $this->getId()];
     }
 
 }

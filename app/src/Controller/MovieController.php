@@ -6,7 +6,6 @@ namespace App\Controller; // namespace é o caminho do arquivo
 use App\Entity\Movie;
 use App\Service\MovieService;
 use App\Repository\MovieRepository;
-use App\Repository\ReviewRepository;
 use App\Repository\DirectorRepository; // importa a classe diretor repository para poder usar os metodos dela
 use App\Repository\GenreRepository; // importa a classe genero repository para poder usar os metodos dela
 use Doctrine\ORM\Mapping\Id;
@@ -18,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 // a classe abaixo é um controller, que é uma metodo que recebe uma requisição e retorna uma resposta
 class MovieController extends AbstractController  
 {
-    public function __construct( private MovieRepository $movieRepository, private DirectorRepository $directorRepository, private GenreRepository $genreRepository, private ReviewRepository $reviewRepository, private MovieService $movieService) { 
+    public function __construct( private MovieRepository $movieRepository, private DirectorRepository $directorRepository, private GenreRepository $genreRepository, private MovieService $movieService) { 
         // o construtor é um metodo que é executado quando a classe é instanciada. 
     }
     

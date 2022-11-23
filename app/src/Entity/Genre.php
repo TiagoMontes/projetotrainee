@@ -46,22 +46,22 @@ class Genre implements JsonSerializable
         return $this;
     }
 
-    public function addMovie(Movie $name): self
+    public function addMovie(Movie $movie): self
     {
-        if (!$this->name->contains($name)) {
-            $this->name->add($name);
-            $name->setGenero($this);
+        if (!$this->movies->contains($movie)) {
+            $this->movies->add($movie);
+            $movie->setGenero($this);
         }
 
         return $this;
     }
 
-    public function removeMovie(Movie $name): self
+    public function removeMovie(Movie $movie): self
     {
-        if ($this->name->removeElement($name)) {
+        if ($this->movies->removeElement($movie)) {
             // set the owning side to null (unless already changed)
-            if ($name->getGenero() === $this) {
-                $name->setGenero(null);
+            if ($movie->getGenero() === $this) {
+                $movie->setGenero(null);
             }
         }
 
@@ -70,6 +70,6 @@ class Genre implements JsonSerializable
 
     public function jsonSerialize(): array
     {
-        return ["Titulo"=>$this->getTitulo(),"Id"=>$this->getId()];
+        return ["name"=>$this->getName(),"Id"=>$this->getId()];
     }
 }

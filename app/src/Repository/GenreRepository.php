@@ -9,10 +9,10 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<Genero>
  *
- * @method Genero|null find($id, $lockMode = null, $lockVersion = null)
- * @method Genero|null findOneBy(array $criteria, array $orderBy = null)
- * @method Genero[]    findAll()
- * @method Genero[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Genre|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Genre|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Genre[]    findAll()
+ * @method Genre[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class GenreRepository extends ServiceEntityRepository
 {

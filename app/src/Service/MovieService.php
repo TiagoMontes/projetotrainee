@@ -15,28 +15,28 @@ class MovieService
 
     }
 
-    public function generateMovie(string $name, string $directorId, string $genreId): void
+    public function generateMovie(string $movie, string $directorId, string $genreId): void
     {
-        if($this->canGenerateMovie($name, $directorId, $genreId)){
+        if($this->canGenerateMovie($movie, $directorId, $genreId)){
             $director = $this->directorRepository->find($directorId);
             $genre = $this->genreRepository->find($genreId);
 
             $movie = new Movie();
-            $movie->setName($name);
+            $movie->setName($movie);
             $movie->setDirector($director);
             $movie->setGenre($genre);
             $this->movieRepository->save($movie, true);
         }
     }
 
-    public function canGenerateMovie(string $name, string $directorId, string $genreId)
+    public function canGenerateMovie(string $movie, string $directorId, string $genreId)
     {
-        if($name == null || $directorId == null || $genreId == null){
+        if($movie == null || $directorId == null || $genreId == null){
             return false;
         }
 
-        $movieExist = $this->movieRepository->findBy(["name" => $name]);
-        if($movieExist != null ){
+        $movieExist = $this->movieRepository->findBy(["name" => $movie]);
+        if(!is_null($movieExist)){
             return false;
         }
 

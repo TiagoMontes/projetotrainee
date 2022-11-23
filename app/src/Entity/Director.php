@@ -20,11 +20,11 @@ class Director implements JsonSerializable
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'director', targetEntity: Movie::class, orphanRemoval: true)]
-    private Collection $films;
+    private Collection $movies;
 
     public function __construct()
     {
-        $this->films = new ArrayCollection();
+        $this->movies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -47,15 +47,15 @@ class Director implements JsonSerializable
     /**
      * @return Collection<int, Filme>
      */
-    public function getFilms(): Collection
+    public function getMovies(): Collection
     {
-        return $this->films;
+        return $this->movies;
     }
 
     public function addMovie(Movie $movie): self
     {
-        if (!$this->films->contains($movie)) {
-            $this->films->add($movie);
+        if (!$this->movies->contains($movie)) {
+            $this->movies->add($movie);
             $movie->setDirector($this);
         }
 
@@ -76,6 +76,6 @@ class Director implements JsonSerializable
 
     public function jsonSerialize(): array
     {
-        return ["Name"=>$this->getName(),"Id"=>$this->getId()];
+        return ["name"=>$this->getName(),"Id"=>$this->getId()];
     }
 }

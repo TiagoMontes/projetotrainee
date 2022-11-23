@@ -28,13 +28,13 @@ class Movie implements JsonSerializable
     private ?Genre $genre = null;
 
     #[ORM\OneToMany(mappedBy: 'movie', targetEntity: Review::class)] // 
-    private Collection $review;  // Collection é uma classe do Doctrine que representa uma coleção de objetos, no caso uma coleção de objetos do tipo Critica, que é a entidade que representa a tabela crítica no banco de dados.
+    private Collection $reviews;  // Collection é uma classe do Doctrine que representa uma coleção de objetos, no caso uma coleção de objetos do tipo Critica, que é a entidade que representa a tabela crítica no banco de dados.
 
     // as funções abaixo são getters e setters, que são responsáveis por pegar e definir os valores dos atributos da classe
 
     public function __construct()
     {
-        $this->review = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     public function getId(): ?int // retorna o id
@@ -78,12 +78,13 @@ class Movie implements JsonSerializable
         return $this;
     }
 
+
     /**
      * @return Collection<int, Filme> 
      */
-    public function getReview(): Collection
+    public function getReviews(): Collection
     {
-        return $this->review;
+        return $this->reviews;
     }
 
     public function addReview(Review $review): self
@@ -99,7 +100,6 @@ class Movie implements JsonSerializable
     public function removeReview(Review $review): self
     {
         if ($this->reviews->removeElement($review)) {
-            // set the owning side to null (unless already changed)
             if ($review->getMovie() === $this) {
                 $review->setMovie(null);
             }
