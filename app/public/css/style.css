@@ -10,8 +10,11 @@ body{
     align-items: center;
     justify-content: center;
 
-    background-color: #FFDEE9;
-    background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
+    background-image: linear-gradient(to top, #3f51b1 0%, #5a55ae 13%, #7b5fac 25%, #8f6aae 38%, #a86aa4 50%, #cc6b8e 62%, #f18271 75%, #f3a469 87%, #f7c978 100%);
+}
+
+li{
+    list-style: none;
 }
 
 .button{
@@ -55,7 +58,7 @@ body{
 
     border-radius: 6px;
     width: 100px;
-        height: 30px;
+    height: 30px;
     background-size: 200% auto;
     color: #fff;
     box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
@@ -95,6 +98,53 @@ body{
     display: flex;
     gap: 20px;
     margin: 10px 0 20px 0;
+}
+
+.container_main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.item_movie, .movie form, .reviews, .item_review{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid red;
+}
+
+.item_movie{
+    width: 600px;
+    margin: 2em 0 1em 0;
+    
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(17.5px);
+    -webkit-backdrop-filter: blur(17.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.movie{
+    padding: 2em 0 2em 0;
+}
+
+.movie li{
+    border: 2px solid blue;
+    width: 420px;
+}
+
+
+.reviews{
+    margin-bottom: 2em;
+}
+
+.reviews li{
+    border: 2px solid blue;
+    width: 420px;
 }
 
 .text_field{

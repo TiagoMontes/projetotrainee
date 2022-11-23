@@ -33,21 +33,23 @@
         </div>
 
 
-        <div class="main">
+        <div class="container_main">
             <h2>Lista de filmes</h2>
             <ul id="movies_list">    
                 {% for movie in films %}  {# esta linha significa - para cada filme dentro de filmes, executaremos o codigo abaixo#}
                     
                     
                     <div class="item_movie">
-                        <li class="filtravel">Filme: <span>{{movie.name}}</span></li>
-                        <li class="filtravel">Diretor: <span>{{movie.director.name}}</span></li>
-                        <li class="filtravel">Gênero: <span>{{movie.genre.name}}</span></li>
-                    
-                        <form action="/movie/delete" method="POST">
-                            <input type="hidden" name="id" value="{{ movie.id }}"/>
-                            <input type="submit" id="button" class="button button--remove" value="Remover"/>
-                        </form>
+                        <div class="movie">
+                            <li class="filtravel">Filme: <span>{{movie.name}}</span></li>
+                            <li class="filtravel">Diretor: <span>{{movie.director.name}}</span></li>
+                            <li class="filtravel">Gênero: <span>{{movie.genre.name}}</span></li>
+                        
+                            <form action="/movie/delete" method="POST">
+                                <input type="hidden" name="id" value="{{ movie.id }}"/>
+                                <input type="submit" id="button" class="button button--remove" value="Remover"/>
+                            </form>
+                        </div>
 
 
                         <div class="reviews">
