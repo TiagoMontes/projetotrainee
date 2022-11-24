@@ -21,7 +21,7 @@ class Genre implements JsonSerializable
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'genre', targetEntity: Movie::class)]
+    #[ORM\OneToMany(mappedBy: 'genre', targetEntity: Movie::class, cascade: ["remove"])]
     private Collection $movies;
 
     public function __construct()

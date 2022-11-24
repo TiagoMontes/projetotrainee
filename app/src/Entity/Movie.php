@@ -27,7 +27,7 @@ class Movie implements JsonSerializable
     #[ORM\JoinColumn(nullable: false)] 
     private ?Genre $genre = null;
 
-    #[ORM\OneToMany( mappedBy: 'movie', targetEntity: Review::class)] // 
+    #[ORM\OneToMany( mappedBy: 'movie', targetEntity: Review::class, cascade: ["remove"])] // 
     private Collection $reviews;
 
     public function __construct()
