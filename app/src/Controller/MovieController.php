@@ -41,8 +41,7 @@ class MovieController extends AbstractController
     {
         $name = $request->request->get('movie');
         $directorId = $request->request->get('directorId');
-        $genreId = $request->request->get('genreId');
-        
+        $genreId = $request->request->get('genreId');      
         $this->movieService->generateMovie($name, $directorId, $genreId);
         
         return $this->redirect('/movie/list');

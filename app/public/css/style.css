@@ -1,3 +1,5 @@
+
+
 *{
     padding: 0;
     margin: 0;
@@ -10,11 +12,16 @@ body{
     align-items: center;
     justify-content: center;
 
-    background-image: linear-gradient(to top, #3f51b1 0%, #5a55ae 13%, #7b5fac 25%, #8f6aae 38%, #a86aa4 50%, #cc6b8e 62%, #f18271 75%, #f3a469 87%, #f7c978 100%);
+    color: rgb(255, 255, 255);
+    background-color: black;
 }
 
 li{
     list-style: none;
+}
+
+input, select{
+    color: white;
 }
 
 .button{
@@ -87,7 +94,7 @@ li{
     justify-content: center;
 
     background: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    box-shadow: 0 8px 32px 0 rgba(75, 75, 75, 0.37);
     backdrop-filter: blur(7px);
     -webkit-backdrop-filter: blur(7px);
     border-radius: 10px;
@@ -108,33 +115,49 @@ li{
     
 }
 
-.item_movie, .movie form, .reviews, .item_review{
+.item_movie, .movie_card form, .reviews, .item_review{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid red;
 }
 
 .item_movie{
     width: 600px;
     margin: 2em 0 1em 0;
     
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    background: rgba(255, 255, 255, 0.064);
+    box-shadow: 0 8px 32px 0 rgba(87, 87, 87, 0.37);
     backdrop-filter: blur(17.5px);
-    -webkit-backdrop-filter: blur(17.5px);
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
+
+    transition: 0.8s cubic-bezier(0.215, 0.610, 0.355, 1);
 }
 
-.movie{
+.item_movie:hover{
+    backdrop-filter: blur(17.5px);
+    background: rgba(208, 208, 208, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(237, 237, 237, 0.37);
+}
+
+.movie_card{
     padding: 2em 0 2em 0;
 }
 
-.movie li{
-    border: 2px solid blue;
+.movie_card li{
+    border: 2px solid rgb(235, 235, 235);
+    padding: 10px 0 5px 10px;
     width: 420px;
+    border-radius: 5px;
+}
+
+.movie{
+    margin: 10px 0 10px 0;
+}
+
+.movie h3{
+    color: white;
 }
 
 
@@ -143,8 +166,11 @@ li{
 }
 
 .reviews li{
-    border: 2px solid blue;
+    border: 2px solid rgba(255, 255, 255, 0.468);
     width: 420px;
+    margin: 5px 0 5px 0;
+    padding: 5px 0 5px 5px;
+    border-radius: 5px;
 }
 
 .text_field{

@@ -40,10 +40,20 @@
                     
                     
                     <div class="item_movie">
-                        <div class="movie">
-                            <li class="filtravel">Filme: <span>{{movie.name}}</span></li>
-                            <li class="filtravel">Diretor: <span>{{movie.director.name}}</span></li>
-                            <li class="filtravel">Gênero: <span>{{movie.genre.name}}</span></li>
+                        <div class="movie_card">
+                            <div class="movie">
+                                <h3>Filme</h3>
+                                <li class="filtravel"><span>{{movie.name}}</span></li>
+                            </div>
+                            <div class="movie">
+                                <h3>Diretor</h3>
+                                <li class="filtravel"><span>{{movie.director.name}}</span></li>       
+                            </div>
+                            <div class="movie">
+                                <h3>Gênero</h3>
+                                <li class="filtravel"><span>{{movie.genre.name}}</span></li>
+                            </div>
+
                         
                             <form action="/movie/delete" method="POST">
                                 <input type="hidden" name="id" value="{{ movie.id }}"/>
@@ -85,12 +95,12 @@
 <script>
 
     //Vamos mapear todas as listas para que o filtro consiga procurar em todos os padrões, seja filme, diretor ou genero
-    const lista = document.querySelector(".movies_list");
+    const lista = document.querySelector("#movies_list");
     const filtraveis = lista.querySelectorAll(".filtravel");
 
     const filtrar = () => {
-        const items_movie = document.querySelectorAll(".item_movie");
-        items_movie.forEach((item) => {
+        const item_movie = document.querySelectorAll(".item_movie");
+        item_movie.forEach((item) => {
             item.style.display = "none";
         })
 
@@ -99,7 +109,7 @@
         filtraveis.forEach((filtravel) => {
             let name = filtravel.innerText.toLowerCase();
             if (name.includes(search)) {
-                filtravel.parentNode.style.display = "flex";
+                filtravel.parentNode.parentNode.parentNode.style.display = "flex";
             }
         });
     }

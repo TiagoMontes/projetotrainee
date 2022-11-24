@@ -27,10 +27,8 @@ class Movie implements JsonSerializable
     #[ORM\JoinColumn(nullable: false)] 
     private ?Genre $genre = null;
 
-    #[ORM\OneToMany(mappedBy: 'movie', targetEntity: Review::class)] // 
-    private Collection $reviews;  // Collection é uma classe do Doctrine que representa uma coleção de objetos, no caso uma coleção de objetos do tipo Critica, que é a entidade que representa a tabela crítica no banco de dados.
-
-    // as funções abaixo são getters e setters, que são responsáveis por pegar e definir os valores dos atributos da classe
+    #[ORM\OneToMany( mappedBy: 'movie', targetEntity: Review::class)] // 
+    private Collection $reviews;
 
     public function __construct()
     {
