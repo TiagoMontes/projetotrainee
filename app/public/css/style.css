@@ -12,22 +12,19 @@ body{
     align-items: center;
     justify-content: center;
 
-    color: rgb(255, 255, 255);
     background-color: black;
+    color: white;
 }
 
 li{
     list-style: none;
 }
 
-input, select{
-    color: white;
-}
-
 .button{
     padding: 5px;
     font-size: 14px;
     font-weight: bold;
+    color: white;
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
     border: 1px solid rgb(163, 163, 163);
@@ -38,7 +35,6 @@ input, select{
     font-weight: bold;
     font-size: 12px;
     text-transform: uppercase;
-    color: #fff;
 
     border-radius: 6px;
     width: 100px;
@@ -67,7 +63,6 @@ input, select{
     width: 100px;
     height: 30px;
     background-size: 200% auto;
-    color: #fff;
     box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
     background-image: linear-gradient(to right, #ed2b2b 0%, #f68686 50%, #ed2b2b 100%);
     transition: 0.5s;
@@ -105,6 +100,10 @@ input, select{
     display: flex;
     gap: 20px;
     margin: 10px 0 20px 0;
+}
+
+.container_form select{
+    color: white;
 }
 
 .container_main{
@@ -171,6 +170,30 @@ input, select{
     margin: 5px 0 5px 0;
     padding: 5px 0 5px 5px;
     border-radius: 5px;
+}
+
+.rating_field{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+    margin: 10px 0 10px 0;
+}
+
+.rating_field select{
+    padding: 0 20px 0 20px;
+    border-radius: 5px;
+    border: 1px solid rgb(163, 163, 163);
+}
+
+.display_review{
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    justify-content: center;
+
+    margin-top: 40px;
 }
 
 .text_field{

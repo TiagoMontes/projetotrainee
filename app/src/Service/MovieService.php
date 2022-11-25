@@ -21,7 +21,7 @@ class MovieService
             $director = $this->directorRepository->find($directorId);
             $genre = $this->genreRepository->find($genreId);
 
-            $movie = new Movie();
+            $movie = new Movie(); 
             $movie->setName($name);
             $movie->setDirector($director);
             $movie->setGenre($genre);
@@ -36,7 +36,7 @@ class MovieService
         }
 
         $movieExist = $this->movieRepository->findBy(["name" => $movie]);
-        if($movieExist != null){
+        if($movieExist != null){ //
             return false;
         }
 

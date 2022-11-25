@@ -14,13 +14,16 @@ class Review implements JsonSerializable
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id = null; // id da review
 
-    #[ORM\ManyToOne(inversedBy: 'reviews')] 
-    private Movie $movie;
+    #[ORM\ManyToOne(inversedBy: 'reviews')] // inversedBy é o nome da propriedade que está na classe Movie que faz o relacionamento com a classe Review (reviews).
+    private Movie $movie; 
 
     #[ORM\Column(length: 255)]
     private ?string $comment = null;
+
+    #[ORM\Column]
+    private ?int $rating = null;
 
     public function getId(): ?int
     {
@@ -34,7 +37,7 @@ class Review implements JsonSerializable
 
     public function setComment(string $comment): self
     {
-        $this->comment = $comment;
+        $this->comment = $comment; 
 
         return $this;
     }
@@ -54,6 +57,18 @@ class Review implements JsonSerializable
     public function jsonSerialize(): array
     {
         return ["comment"=> $this->getReview(),"Id"=> $this->getId()];
+    }
+
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    public function setRating(int $rating): self
+    {
+        $this->rating = $rating;
+
+        return $this;
     }
 
 }

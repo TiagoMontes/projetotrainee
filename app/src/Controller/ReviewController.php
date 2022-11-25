@@ -30,12 +30,15 @@ class ReviewController extends AbstractController
     public function newReview(Request $request)
     {
         $reviewContent = $request->request->get('review');
+        $rating = $request->request->get('rating');
+
         $movieId = $request->request->get('movie_id');
         $movie = $this->movieRepository->find($movieId);
 
-        if($reviewContent != null && $movie != null){
+        if($reviewContent != null && $movie != null && $rating != null){
             $review = new Review();
-            $review->setReview($reviewContent);
+            $review->setComment($reviewContent);
+            $review->setRating($rating);
             $review->setMovie($movie);
             $this->reviewRepository->save($review, true);
         }

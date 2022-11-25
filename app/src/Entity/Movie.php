@@ -23,7 +23,7 @@ class Movie implements JsonSerializable
     #[ORM\JoinColumn(nullable: false)] 
     private ?Director $director = null;
 
-    #[ORM\ManyToOne(inversedBy: 'movies')] 
+    #[ORM\ManyToOne(inversedBy: 'movies')] // inversedBBy é o nome da propriedade que está na classe Genre que faz o relacionamento com a classe Movie (movies). 
     #[ORM\JoinColumn(nullable: false)] 
     private ?Genre $genre = null;
 

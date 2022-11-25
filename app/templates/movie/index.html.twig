@@ -39,7 +39,7 @@
                 {% for movie in films %}  {# esta linha significa - para cada filme dentro de filmes, executaremos o codigo abaixo#}
                     
                     
-                    <div class="item_movie">
+                    <div class="item_movie"> 
                         <div class="movie_card">
                             <div class="movie">
                                 <h3>Filme</h3>
@@ -53,7 +53,15 @@
                                 <h3>Gênero</h3>
                                 <li class="filtravel"><span>{{movie.genre.name}}</span></li>
                             </div>
-
+                            <div class="movie">
+                                {% set sumrating = 0 %}
+                                {% for review in movie.reviews %}
+                                {% set sumrating = sumrating + review.rating %}
+                                {% endfor %}
+                                {% set media = sumrating/movie.reviews|length %}
+                                <h3>Média</h3>
+                                <li class="filtravel"><span>{{media|number_format(1,'.', ',')}}</span></li>
+                            </div>
                         
                             <form action="/movie/delete" method="POST">
                                 <input type="hidden" name="id" value="{{ movie.id }}"/>
@@ -69,12 +77,29 @@
                             <form action="/review/new" class="item_review" method="POST">
                                 <input type="hidden" name="movie_id" value="{{ movie.id }}"/>
                                 <textarea name="review" rows="4" cols="50" placeholder="Deixe sua nota de 0 a 5 e uma critica ao filme"></textarea>
+
+                                <div class="rating_field">
+                                    <label for="rating">Nota</label>
+                                    <select name="rating">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+
                                 <input type="submit" value="Enviar" id="button" class="button button--send"/>
                             </form>
 
+                            <div class="display_review">
                             {% for review in movie.reviews %}
+                                <h3>Crítica</h3>
+                                <li>Nota: {{review.rating}}</li>
                                 <li>{{review.comment}}</li>
                             {% endfor %}
+                            </div>
 
                         </div>
 
