@@ -55,12 +55,19 @@
                             </div>
 
                             <div class="movie">
-                                {% set sumrating = 0 %}
+                            {% set average = 0 %}
+                            {% set sumratingDivision = 0 %}
+                            {% set sumrating = 0 %}
+                            
                                 {% for review in movie.reviews %}
-                                {% set sumrating = sumrating + review.rating %}
+                                {% if review.rating != null %}
+                                    {% set sumrating = sumrating + review.rating %}
+                                    {% set sumratingDivision = sumratingDivision + 1 %}
+                                    {% set average = sumrating / sumratingDivision %}
+                                    {% set average = average|number_format(1,'.',',')%}
+                                {% endif %} 
                                 {% endfor %}
-                                {% set sumratingDivision = sumrating/movie.reviews|length %}
-                                {% set average = sumratingDivision|number_format(1, '.', ',')%}
+
                                 <h3>Média</h3>
                                 <li class="filtravel">
                                     <span class="average">{{average}}</span>
